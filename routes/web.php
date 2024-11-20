@@ -40,6 +40,8 @@ Route::get('/Event', [EventController::class, 'index']);
 Route::get('/api/events', [EventController::class, 'getEvents']);
 Route::get('/Event/{id}', [EventController::class, 'detail'])->name('events.detail');
 Route::get('/placeDetail/{id}', [PlaceDetailController::class, 'show'])->name('placeDetail');
+Route::get('/PlanDetail/{planId?}', [PlanDetailController::class, 'index'])->name('plan.detail');
+// Route::get('/api/places', [PlaceController::class, 'getPlaces']);
 
 
 

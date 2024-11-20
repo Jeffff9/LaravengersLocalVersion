@@ -1,45 +1,26 @@
-const makePlanButton = document.getElementById('makePlanButton');
-
-makePlanButton.onclick = function(){
-    const priority = [];
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-    if (cart.length === 0) {
-        alert('プランを生成するにはイベントを追加してください。');
-        return;
-    }
-
-    for(let i = 0; i < cart.length; i++){
-        const durationSelect = document.getElementById(`durationSelect${i}`)?.value;
-        const priorityValue = document.getElementById(`placePriority${i}`)?.value;
-        const item = cart[i];
-        priority.push({
-            title: item.title,
-            priority: priorityValue,
-            duration: durationSelect
-        });
-    }
-
-    // Build the list of places as a formatted string
-    const placesList = priority.map(place => {
-        return `${place.title}（優先度: ${place.priority}, 滞在時間: ${place.duration}分）`;
-    }).join('、');
-
-    const str = `明日土曜日、${placesList} に行きたい、ツアーを作ってください。目的地の定休日をチェックしてください。日本語で回答してください。明日は定休日になれば、ツアーを作らないでください。`;
-
-    alert(str);
-}
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const cartEventsDiv = document.getElementById('cartEvents');
+    const timeSelectorContainer = document.querySelector('.time-selector-container');
 
     if (cart.length === 0) {
         cartEventsDiv.innerHTML = '<p class="text-muted">カートにイベントが追加されていません。</p>';
+        timeSelectorContainer.style.display = 'none';
         return;
     }
+
+    timeSelectorContainer.style.display = 'block';
+
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const formatDate = (date) => {
+        return date.toISOString().split('T')[0];
+    };
+
+    document.getElementById('startDate').value = formatDate(tomorrow);
+    document.getElementById('endDate').value = formatDate(tomorrow);
 
     cart.forEach((item, index) => {
         const isEvent = item.type === 'event';

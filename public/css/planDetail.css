@@ -1,0 +1,268 @@
+.timeline {
+    padding: 20px;
+    position: relative;
+}
+
+.time-block {
+    border-left: 3px solid #007bff;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeInLeft 0.5s ease forwards;
+}
+
+.activity {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.activity::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: #007bff;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.activity:hover {
+    transform: translateY(-3px) translateX(3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.activity:hover::before {
+    opacity: 1;
+}
+
+.access {
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.time-block h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-block h2 i {
+    font-size: 1.5em;
+}
+
+@keyframes fadeInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 各時間帯ブロックの遅延アニメーション */
+.time-block:nth-child(1) { animation-delay: 0.1s; }
+.time-block:nth-child(2) { animation-delay: 0.2s; }
+.time-block:nth-child(3) { animation-delay: 0.3s; }
+.time-block:nth-child(4) { animation-delay: 0.4s; }
+.time-block:nth-child(5) { animation-delay: 0.5s; }
+
+/* 時間帯によって色を変える */
+.time-block.morning {
+    border-left-color: #ffc107;
+}
+.time-block.morning .activity::before {
+    background: #ffc107;
+}
+
+.time-block.lunch {
+    border-left-color: #28a745;
+}
+.time-block.lunch .activity::before {
+    background: #28a745;
+}
+
+.time-block.afternoon {
+    border-left-color: #17a2b8;
+}
+.time-block.afternoon .activity::before {
+    background: #17a2b8;
+}
+
+.time-block.evening {
+    border-left-color: #fd7e14;
+}
+.time-block.evening .activity::before {
+    background: #fd7e14;
+}
+
+.time-block.night {
+    border-left-color: #6f42c1;
+}
+.time-block.night .activity::before {
+    background: #6f42c1;
+}
+
+.plan-header {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+                url('../images/background_image.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 40px 0;
+    margin: 20px 0 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUpFade 0.8s ease-out forwards;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.plan-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 0.8s ease-out 0.3s forwards;
+}
+
+.plan-description {
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.plan-stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: scaleIn 0.8s ease-out 0.7s forwards;
+}
+
+.stat-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideUpFade {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .plan-stats {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-item {
+        width: 80%;
+    }
+
+    .plan-header h1 {
+        font-size: 2rem;
+    }
+}
+
+.place-link-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.place-link-container .btn {
+    transition: all 0.3s ease;
+}
+
+.place-link-container .btn:hover {
+    transform: translateY(-2px);
+}
+
+.place-link-container .badge {
+    padding: 0.5em 0.8em;
+    font-weight: normal;
+}
