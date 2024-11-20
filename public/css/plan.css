@@ -1,0 +1,102 @@
+body {
+    background: linear-gradient(135deg, #4B8EC8 0%, #1B4B8F 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+main {
+    padding-top: 80px;
+}
+
+/* タイトルスタイル */
+h2 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #ffffff, #e0e0e0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* カードのスタイル */
+.card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+    color: #1B4B8F;
+    font-weight: 600;
+}
+
+.card-text {
+    color: #333;
+}
+
+.card-img-fixed {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+    transition: transform 0.6s ease;
+}
+
+.card:hover .card-img-fixed {
+    transform: scale(1.05);
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 各カードに遅延を設定 */
+.col:nth-child(1) .card {
+    animation-delay: 0.1s;
+}
+
+.col:nth-child(2) .card {
+    animation-delay: 0.2s;
+}
+
+.col:nth-child(3) .card {
+    animation-delay: 0.3s;
+}
+
+.col:nth-child(4) .card {
+    animation-delay: 0.4s;
+}
+
+/* ボタンのスタイル */
+.btn-primary {
+    background-color: #1B4B8F;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #154178;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(27, 75, 143, 0.3);
+}
