@@ -49,84 +49,52 @@
                                 <!-- カテゴリーセクション -->
                                 <div class="filter-section">
                                     <div class="filter-header">
-                                        <h4>
+                                        {{-- <h4>
                                             <i class="bi bi-grid me-2"></i>
                                             カテゴリー
-                                        </h4>
+                                        </h4> --}}
                                     </div>
                                     <div class="filter-content">
-                                        <div class="filter-options">
-                                            <div class="filter-item">
-                                                <label class="filter-label">
-                                                    <input type="checkbox" class="filter-checkbox">
-                                                    <span class="checkmark"></span>
-                                                    <span class="label-text">動物園</span>
-                                                    <span class="count">12</span>
-                                                </label>
+                                        <form action="{{ url('/Place') }}" method="GET">
+                                            <!-- カテゴリーフィルター -->
+                                            <div class="filter-section">
+                                                <h4>カテゴリー</h4>
+                                                @foreach($characteristics as $characteristic)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               name="characteristics[]" value="{{ $characteristic->characteristics }}"
+                                                               id="characteristic_{{ $loop->index }}"
+                                                               {{ in_array($characteristic->characteristics, request('characteristics', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="characteristic_{{ $loop->index }}">
+                                                            {{ $characteristic->characteristics }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                            <div class="filter-item">
-                                                <label class="filter-label">
-                                                    <input type="checkbox" class="filter-checkbox">
-                                                    <span class="checkmark"></span>
-                                                    <span class="label-text">公園</span>
-                                                    <span class="count">8</span>
-                                                </label>
-                                            </div>
-                                            <div class="filter-item">
-                                                <label class="filter-label">
-                                                    <input type="checkbox" class="filter-checkbox">
-                                                    <span class="checkmark"></span>
-                                                    <span class="label-text">美術館</span>
-                                                    <span class="count">15</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- エリアセクション -->
-                                <div class="filter-section">
-                                    <div class="filter-header">
-                                        <h4>
-                                            <i class="bi bi-geo-alt me-2"></i>
-                                            エリア
-                                        </h4>
-                                    </div>
-                                    <div class="filter-content">
-                                        <div class="filter-options">
-                                            <div class="filter-item">
-                                                <label class="filter-label">
-                                                    <input type="checkbox" class="filter-checkbox">
-                                                    <span class="checkmark"></span>
-                                                    <span class="label-text">大阪</span>
-                                                    <span class="count">20</span>
-                                                </label>
+                                            <!-- エリアフィルター -->
+                                            <div class="filter-section">
+                                                <h4>エリア</h4>
+                                                @foreach($areas as $area)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               name="area[]" value="{{ $area->address }}"
+                                                               id="area_{{ $loop->index }}"
+                                                               {{ in_array($area->address, request('area', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="area_{{ $loop->index }}">
+                                                            {{ $area->address }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                            <div class="filter-item">
-                                                <label class="filter-label">
-                                                    <input type="checkbox" class="filter-checkbox">
-                                                    <span class="checkmark"></span>
-                                                    <span class="label-text">京都</span>
-                                                    <span class="count">15</span>
-                                                </label>
-                                            </div>
-                                            <div class="filter-item">
-                                                <label class="filter-label">
-                                                    <input type="checkbox" class="filter-checkbox">
-                                                    <span class="checkmark"></span>
-                                                    <span class="label-text">神戸</span>
-                                                    <span class="count">10</span>
-                                                </label>
-                                            </div>
-                                        </div>
+
+                                            <button type="submit" class="search-btn">
+                                                <i class="bi bi-search me-2"></i>検索する
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-
-                            <button class="search-btn">
-                                <i class="bi bi-search me-2"></i>
-                                検索する
-                            </button>
                         </div>
                     </aside>
                 </div>
@@ -134,28 +102,32 @@
                 <!-- Cards -->
                 <div class="col-md-9">
                     <div class="row row-cols-1 row-cols-md-3 g-4" style="min-height: calc(100vh - 280px);">
-                        @foreach ($post as $place)
+                        @foreach ($places as $place)
                         <div class="col">
                             <div class="card h-100"
-                                 data-category="{{ $place->category ?? '動物園' }}"
-                                 data-area="{{ $place->area ?? '大阪' }}">
-                                <img src="https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp"
+                                 data-category="{{ $place->characteristics }}"
+                                 data-area="{{ $place->address }}">
+                                <img src="{{ $place->image_url ?? 'https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp' }}"
                                      class="card-img-top"
                                      style="height: 200px; object-fit: cover; width: 100%;"
                                      alt="{{$place->placeName}}">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title" style="font-size: 1.2rem; margin-bottom: 0.75rem;">{{$place->placeName}}</h5>
+                                    <p class="card-text">{{$place->shortDetail}}</p>
                                     <div class="d-flex gap-2 mt-auto">
-                                        <a href="/PlaceDetail" class="btn btn-outline-primary btn-sm" style="z-index: 1;">詳細</a>
-                                        <button onclick="addToCart({
-                                            id: '{{$place->placeName}}',
-                                            title: '{{$place->placeName}}',
-                                            description: '{{$place->shortDetail}}',
-                                            image_url: 'https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp',
-                                            location: '大阪',
-                                            category: '観光施設',
-                                            type: 'place'
-                                        })" class="btn btn-primary btn-sm" style="z-index: 1;">
+                                        <a href="{{ route('place.detail', ['id' => $place->placeNumber]) }}" class="btn btn-outline-primary btn-sm" style="z-index: 1;">詳細</a>
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm"
+                                                style="z-index: 1;"
+                                                onclick="addToCart({
+                                                    id: '{{$place->placeNumber}}',
+                                                    title: '{{$place->placeName}}',
+                                                    description: '{{$place->shortDetail}}',
+                                                    image_url: '{{ $place->image_url ?? 'https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp' }}',
+                                                    location: '{{$place->address}}',
+                                                    category: '{{$place->characteristics}}',
+                                                    type: 'place'
+                                                })">
                                             <i class="bi bi-cart-plus"></i> カートに追加
                                         </button>
                                     </div>
@@ -163,6 +135,26 @@
                             </div>
                         </div>
                         @endforeach
+                    </div>
+
+                    <!-- ページネーション -->
+                    <div class="pagination-container">
+                        <div class="page-info">
+                            {{ $places->firstItem() }}-{{ $places->lastItem() }} / {{ $places->total() }}件
+                        </div>
+                        <div class="pagination">
+                            @if ($places->onFirstPage())
+                                <button class="btn btn-secondary btn-sm" disabled>Previous</button>
+                            @else
+                                <a href="{{ $places->previousPageUrl() }}" class="btn btn-primary btn-sm">Previous</a>
+                            @endif
+
+                            @if ($places->hasMorePages())
+                                <a href="{{ $places->nextPageUrl() }}" class="btn btn-primary btn-sm">Next</a>
+                            @else
+                                <button class="btn btn-secondary btn-sm" disabled>Next</button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

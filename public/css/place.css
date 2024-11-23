@@ -368,7 +368,7 @@ h1 {
     font-weight: 600;
 }
 
-/* ナビゲーションバー全体の調整 */
+/* ナビ��ーションバー全体の調整 */
 .navbar {
     padding: 15px 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -696,7 +696,7 @@ h1 {
     align-items: center;
 }
 
-/* ラベルと��ウント */
+/* ラベルとウント */
 .label-text {
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.9rem;
@@ -746,4 +746,66 @@ h1 {
 .row.row-cols-1.row-cols-md-3.g-4 {
     margin-top: 30px;
     /* 絞り込み検索と同じ高さに合わせる */
+}
+
+/* ページネーションのスタイル更新 */
+.pagination-container {
+    position: relative;
+    background: transparent;
+    padding: 12px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;  /* 右寄せに */
+    align-items: center;
+}
+
+.pagination {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+}
+
+.pagination .page-item {
+    list-style: none;
+}
+
+/* 数字のページネーションは非表示 */
+.pagination li:not(:last-child):not(:first-child) {
+    display: none;
+}
+
+/* Prev/Nextボタンのスタイル */
+.pagination .page-link {
+    padding: 8px 16px;
+    color: #ffffff;
+    background-color: rgba(27, 75, 143, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(27, 75, 143, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: rgba(27, 75, 143, 0.4);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ページ情報の表示 */
+.page-info {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-right: 15px;
 }

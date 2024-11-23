@@ -28,7 +28,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('', [HomeController::class, 'index']);
 // Route::get('/Place', [PlaceController::class, 'index']);
-Route::get('/Place', [PlaceController::class, 'index'])->name('Place');
+Route::get('/Place', [PlaceController::class, 'index'])->name('place.index');
 Route::get('/PlaceDetail', [PlaceDetailController::class, 'index']);
 Route::get('/Cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/Plan', [PlanController::class, 'index']);
@@ -42,6 +42,7 @@ Route::get('/Event/{id}', [EventController::class, 'detail'])->name('events.deta
 Route::get('/placeDetail/{id}', [PlaceDetailController::class, 'show'])->name('placeDetail');
 Route::get('/PlanDetail/{planId?}', [PlanDetailController::class, 'index'])->name('plan.detail');
 // Route::get('/api/places', [PlaceController::class, 'getPlaces']);
+Route::get('/PlaceDetail/{id}', [PlaceController::class, 'detail'])->name('place.detail');
 
 
 
