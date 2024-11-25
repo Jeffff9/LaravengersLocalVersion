@@ -139,21 +139,40 @@
 
                     <!-- ページネーション -->
                     <div class="pagination-container">
-                        <div class="page-info">
-                            {{ $places->firstItem() }}-{{ $places->lastItem() }} / {{ $places->total() }}件
-                        </div>
-                        <div class="pagination">
-                            @if ($places->onFirstPage())
-                                <button class="btn btn-secondary btn-sm" disabled>Previous</button>
-                            @else
-                                <a href="{{ $places->previousPageUrl() }}" class="btn btn-primary btn-sm">Previous</a>
-                            @endif
+                        <div class="pagination-wrapper">
+                            <div class="pagination">
+                                {{-- Previous Page Link --}}
+                                @if ($places->onFirstPage())
+                                    <li class="page-item disabled">
+                                        <span class="page-link">Previous</span>
+                                    </li>
+                                @else
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $places->previousPageUrl() }}">Previous</a>
+                                    </li>
+                                @endif
 
-                            @if ($places->hasMorePages())
-                                <a href="{{ $places->nextPageUrl() }}" class="btn btn-primary btn-sm">Next</a>
-                            @else
-                                <button class="btn btn-secondary btn-sm" disabled>Next</button>
-                            @endif
+                                {{-- Pagination Elements --}}
+                                @foreach ($places->getUrlRange(1, $places->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $places->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                {{-- Next Page Link --}}
+                                @if ($places->hasMorePages())
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $places->nextPageUrl() }}">Next</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled">
+                                        <span class="page-link">Next</span>
+                                    </li>
+                                @endif
+                            </div>
+                            <div class="total-count">
+                                全{{ $places->total() }}件
+                            </div>
                         </div>
                     </div>
                 </div>
