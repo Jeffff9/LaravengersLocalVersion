@@ -25,12 +25,12 @@
             <div class="text-center mb-5">
                 <h1 class="display-4 fw-bold text-white"
                     style="font-size: 3.5rem;
-                           letter-spacing: 0.05em;
-                           margin-bottom: 2rem;
-                           background: linear-gradient(45deg, #ffffff, #e0e0e0);
-                           -webkit-background-clip: text;
-                           -webkit-text-fill-color: transparent;
-                           text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);">
+                        letter-spacing: 0.05em;
+                        margin-bottom: 2rem;
+                        background: linear-gradient(45deg, #ffffff, #e0e0e0);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);">
                     観光地の紹介
                 </h1>
             </div>

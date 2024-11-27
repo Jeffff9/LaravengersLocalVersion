@@ -47,4 +47,17 @@ class PlaceController extends Controller
 
         return view('place', compact('places', 'characteristics', 'areas'));
     }
+
+    // 詳細ページ用のメソッドを追加
+    public function detail($id)
+    {
+        // IDに基づいて場所の詳細情報を取得
+        $place = DB::table('places')->where('placeNumber', $id)->first();
+
+        if (!$place) {
+            abort(404); // 場所が見つからない場合は404エラー
+        }
+
+        return view('placeDetail', compact('place'));
+    }
 }

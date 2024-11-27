@@ -266,3 +266,12 @@
     padding: 0.5em 0.8em;
     font-weight: normal;
 }
+
+.access a {
+    transition: color 0.3s ease;
+}
+
+.access a:hover {
+    color: #4B8EC8 !important;
+    text-decoration: underline !important;
+}
