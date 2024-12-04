@@ -88,6 +88,30 @@ h2 {
     animation-delay: 0.4s;
 }
 
+.col:nth-child(5) .card {
+    animation-delay: 0.5s;
+}
+
+.col:nth-child(6) .card {
+    animation-delay: 0.6s;
+}
+
+.col:nth-child(7) .card {
+    animation-delay: 0.7s;
+}
+
+.col:nth-child(8) .card {
+    animation-delay: 0.8s;
+}
+
+.col:nth-child(9) .card {
+    animation-delay: 0.9s;
+}
+
+.col:nth-child(10) .card {
+    animation-delay: 1.0s;
+}
+
 /* ボタンのスタイル */
 .btn-primary {
     background-color: #1B4B8F;

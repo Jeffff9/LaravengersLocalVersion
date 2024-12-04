@@ -34,9 +34,9 @@
                         <img src="https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp"
                             class="card-img-top card-img-fixed card-img-fixed" alt="">
                         <div class="card-body">
-                            <h5 class="card-title">ミンのプラン</h5>
+                            <h5 class="card-title">大阪のプラン<</h5>
                             <p class="card-text">大阪一日遊び</p>
-                            <a href="PlanDetail" class="btn btn-primary">詳細</a>
+                            <a href="PlanDetail/osaka" class="btn btn-primary">詳細</a>
                         </div>
                     </div>
                 </div>
@@ -46,9 +46,9 @@
                         <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
                             class="card-img-top card-img-fixed" alt="">
                         <div class="card-body">
-                            <h5 class="card-title">サンのプラン</h5>
+                            <h5 class="card-title">神戸のプラン</h5>
                             <p class="card-text">神戸一日遊び</p>
-                            <a href="PlanDetail" class="btn btn-primary">詳細</a>
+                            <a href="PlanDetail/kobe" class="btn btn-primary">詳細</a>
                         </div>
                     </div>
                 </div>
@@ -57,9 +57,9 @@
                         <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
                             class="card-img-top card-img-fixed" alt="">
                         <div class="card-body">
-                            <h5 class="card-title">タムのプラン</h5>
+                            <h5 class="card-title">京都のプラン</h5>
                             <p class="card-text">京都一日遊び</p>
-                            <a href="PlanDetail" class="btn btn-primary">詳細</a>
+                            <a href="PlanDetail/kyoto" class="btn btn-primary">詳細</a>
                         </div>
                     </div>
                 </div>
@@ -68,9 +68,104 @@
                         <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
                             class="card-img-top card-img-fixed" alt="">
                         <div class="card-body">
-                            <h5 class="card-title">ホイのプラン</h5>
+                            <h5 class="card-title">奈良のプラン</h5>
                             <p class="card-text">奈良一日遊び</p>
-                            <a href="PlanDetail" class="btn btn-primary">詳細</a>
+                            <a href="PlanDetail/nara" class="btn btn-primary">詳細</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                            class="card-img-top card-img-fixed" alt="和歌山城と桜">
+                        <div class="card-body">
+                            <h5 class="card-title">和歌山のプラン</h5>
+                            <p class="card-text">和歌山一日遊び</p>
+                            <a href="PlanDetail/wakayama" class="btn btn-primary">詳細</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                            class="card-img-top card-img-fixed" alt="琵琶湖と比叡山">
+                        <div class="card-body">
+                            <h5 class="card-title">滋賀のプラン</h5>
+                            <p class="card-text">滋賀一日遊び</p>
+                            <a href="PlanDetail/shiga" class="btn btn-primary">詳細</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                            class="card-img-top card-img-fixed" alt="嵐山の竹林">
+                        <div class="card-body">
+                            <h5 class="card-title">京都嵐山プラン</h5>
+                            <p class="card-text">嵐山・渡月橋散策</p>
+                            <a href="PlanDetail/arashiyama" class="btn btn-primary">詳細</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                            class="card-img-top card-img-fixed" alt="USJ">
+                        <div class="card-body">
+                            <h5 class="card-title">USJプラン</h5>
+                            <p class="card-text">ユニバーサル・スタジオ・ジャパン</p>
+                            <a href="PlanDetail/usj" class="btn btn-primary">詳細</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                            class="card-img-top card-img-fixed" alt="有馬温泉">
+                        <div class="card-body">
+                            <h5 class="card-title">有馬温泉プラン</h5>
+                            <p class="card-text">日本三古湯を満喫</p>
+                            <a href="PlanDetail/arima" class="btn btn-primary">詳細</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                            class="card-img-top card-img-fixed" alt="奈良公園">
+                        <div class="card-body">
+                            <h5 class="card-title">奈良公園プラン</h5>
+                            <p class="card-text">鹿と触れ合う癒しの旅</p>
+                            <a href="PlanDetail/narapark" class="btn btn-primary">詳細</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                            class="card-img-top card-img-fixed" alt="天橋立">
+                        <div class="card-body">
+                            <h5 class="card-title">天橋立プラン</h5>
+                            <p class="card-text">日本三景を満喫</p>
+                            <a href="PlanDetail/amanohashidate" class="btn btn-primary">詳細</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                            class="card-img-top card-img-fixed" alt="姫路城">
+                        <div class="card-body">
+                            <h5 class="card-title">姫路城プラン</h5>
+                            <p class="card-text">世界遺産の白鷺城を巡る</p>
+                            <a href="PlanDetail/himeji" class="btn btn-primary">詳細</a>
                         </div>
                     </div>
                 </div>

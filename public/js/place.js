@@ -1,9 +1,30 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // カートに追加ボタンのイベントリスナーを設定
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const placeData = JSON.parse(this.dataset.place);
+            addToCart(placeData);
+        });
+    });
+});
+
 function addToCart(place) {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    // ローカルストレージからカートを取得
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // 既に追加されているかチェック
+    const existingItem = cart.find(item => item.placeNumber === place.placeNumber);
+
+    if (existingItem) {
+        alert('この場所は既にカートに追加されています。');
+        return;
+    }
+
+    // カートに追加
     cart.push(place);
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
-    alert('カートに追加しました');
+    alert('カートに追加しました！');
 }
 
 function updateCartCount() {
@@ -37,7 +58,6 @@ function toggleSection(sectionId) {
         content.style.maxHeight = "0";
     }
 }
-
 // 初期状態で開いておく場合は以下をコメントアウト
 /*
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,3 +72,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 */
+

@@ -368,7 +368,7 @@ h1 {
     font-weight: 600;
 }
 
-/* ナビゲーションバー全体の調整 */
+/* ナビーションバー全体の調整 */
 .navbar {
     padding: 15px 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -696,7 +696,7 @@ h1 {
     align-items: center;
 }
 
-/* ラベルと��ウント */
+/* ラベルとウント */
 .label-text {
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.9rem;
@@ -746,4 +746,87 @@ h1 {
 .row.row-cols-1.row-cols-md-3.g-4 {
     margin-top: 30px;
     /* 絞り込み検索と同じ高さに合わせる */
+}
+
+/* ページネーションのスタイル更新 */
+.pagination-container {
+    position: relative;
+    background: transparent;
+    padding: 12px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.total-count {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: rgba(27, 75, 143, 0.8);
+    padding: 8px 16px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination {
+    display: flex;
+    gap: 5px;
+    margin: 0;
+}
+
+.pagination .page-item {
+    list-style: none;
+}
+
+.pagination .page-link {
+    padding: 8px 16px;
+    color: #ffffff;
+    background-color: rgba(27, 75, 143, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #1B4B8F;
+    font-weight: 700;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.pagination .page-item.active {
+    position: relative;
+    z-index: 2;
+}
+
+.pagination .page-item.active .page-link:hover {
+    background-color: #ffffff;
+    color: #1B4B8F;
+    transform: scale(1.1) translateY(-2px);
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(27, 75, 143, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: rgba(27, 75, 143, 0.4);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }

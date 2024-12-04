@@ -4,20 +4,60 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Place;
 
 class PlaceController extends Controller
 {
-    public function index(){
-        $post = DB::table('places')->get();
+    public function index(Request $request){
+        $query = DB::table('places');
 
-        return view('place', compact('post'));
+        // キーワード検索
+        if ($request->has('keyword')) {
+            $keyword = $request->keyword;
+            $query->where(function($q) use ($keyword) {
+                $q->where('placeName', 'like', "%{$keyword}%")
+                  ->orWhere('shortDetail', 'like', "%{$keyword}%");
+            });
+        }
+
+        // 特徴による絞り込み
+        if ($request->has('characteristics')) {
+            $query->whereIn('characteristics', $request->characteristics);
+        }
+
+        // エリアによる絞り込み
+        if ($request->has('area')) {
+            $query->whereIn('address', $request->area);
+        }
+
+        // 6件ごとにページネーション
+        $places = $query->paginate(6);
+
+        // 場所の種類（characteristics）とエリア（address）の一覧を取得
+        $characteristics = DB::table('places')
+            ->select('characteristics')
+            ->whereNotNull('characteristics')
+            ->distinct()
+            ->get();
+
+        $areas = DB::table('places')
+            ->select('address')
+            ->whereNotNull('address')
+            ->distinct()
+            ->get();
+
+        return view('place', compact('places', 'characteristics', 'areas'));
     }
 
-    public function getPlaces()
+    // 詳細ページ用のメソッドを追加
+    public function detail($id)
     {
-        $places = Place::select('id', 'name')->get();
-        return response()->json($places);
-    }
+        // IDに基づいて場所の詳細情報を取得
+        $place = DB::table('places')->where('placeNumber', $id)->first();
 
+        if (!$place) {
+            abort(404); // 場所が見つからない場合は404エラー
+        }
+
+        return view('placeDetail', compact('place'));
+    }
 }
