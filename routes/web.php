@@ -32,6 +32,7 @@ Route::get('', [HomeController::class, 'index']);
 Route::get('/Place', [PlaceController::class, 'index'])->name('place.index');
 Route::get('/PlaceDetail', [PlaceDetailController::class, 'index']);
 Route::get('/Cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/Cart/post', [CartController::class, 'post']);
 Route::get('/Plan', [PlanController::class, 'index']);
 Route::get('/PlanDetail', [PlanDetailController::class, 'index']);
 Route::get('/register',[RegisterController::class,'showRegisterForm'])->name('register');
