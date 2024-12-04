@@ -1,3 +1,9 @@
+<?php
+if (isset($_POST)) {
+    $question = file_get_contents('php://input');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -75,14 +81,13 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button id="makePlanButton" class="btn btn-generate-plan">
+                    <button id="createPlanButton" class="btn btn-generate-plan">
                         <i class="bi bi-calendar-check"></i> プランを生成する
                     </button>
                 </div>
             </div>
         </div>
     </div>
-
     <footer id="footer"></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

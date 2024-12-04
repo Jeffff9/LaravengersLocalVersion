@@ -1,3 +1,51 @@
+const createPlanButton = document.getElementById('createPlanButton');
+
+createPlanButton.onclick = function(){
+    const priority = [];
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    if (cart.length === 0) {
+        alert('プランを生成するにはイベントを追加してください。');
+        return;
+    }else{
+        window.location.href="/Result";
+    }
+
+    for(let i = 0; i < cart.length; i++){
+        const durationSelect = document.getElementById(`durationSelect${i}`)?.value;
+        const priorityValue = document.getElementById(`placePriority${i}`)?.value;
+        const item = cart[i];
+        priority.push({
+            title: item.title,
+            priority: priorityValue,
+            duration: durationSelect
+        });
+    }
+
+    const placesList = priority.map(place => {
+        return `${place.title}（優先度: ${place.priority}, 滞在時間: ${place.duration}分）`;
+    }).join('、');
+
+    const question = `明日土曜日、${placesList} に行きたい、ツアーを作ってください。目的地の定休日をチェックしてください。日本語で回答してください。明日は定休日になれば、ツアーを作らないでください。`;
+    // localStorage.setItem('question',str);
+    alert(str);
+    fetch("cart.php",{
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        body: `question=${encodeURIComponent(question)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        alert(data.message); // Shows success message from the server
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const cartEventsDiv = document.getElementById('cartEvents');
@@ -101,6 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
         cartEventsDiv.insertAdjacentHTML('beforeend', eventHtml);
     });
 });
+
+
 
 function generateOrderOptions(total, current) {
     let options = '';

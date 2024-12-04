@@ -10,6 +10,7 @@ use App\Http\Controllers\PlanDetailController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ResultController;
 
 
 /*
@@ -41,6 +42,7 @@ Route::get('/api/events', [EventController::class, 'getEvents']);
 Route::get('/Event/{id}', [EventController::class, 'detail'])->name('events.detail');
 Route::get('/placeDetail/{id}', [PlaceDetailController::class, 'show'])->name('placeDetail');
 Route::get('/PlanDetail/{planId?}', [PlanDetailController::class, 'index'])->name('plan.detail');
+Route::get('/Result', [ResultController::class, 'index']);
 // Route::get('/api/places', [PlaceController::class, 'getPlaces']);
 
 
