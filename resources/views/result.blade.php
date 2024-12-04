@@ -9,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/result.css') }}"> --}}
 </head>
 
 <body>
@@ -17,13 +16,12 @@
     </header>
     <main>
         <div id="result" class="container mt-4">
-            <p>{{$question}}</p>
+            <p>{{ $question }}</p>
         </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- <script src="{{ asset('js/common.js') }}"></script> --}}
-    <script type="module" src="{{ asset('js/result.js') }}"></script>
+    {{-- <script type="module" src="{{ asset('js/result.js') }}"></script> --}}
 </body>
 
 </html>

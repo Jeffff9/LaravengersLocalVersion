@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class ResultController extends Controller
 {
     public function index(Request $request)
     {
-        $question = $request->session()->get('question', 'Default question if none found');
+         // Retrieve the question from the session
+        $question = session('question');
 
-        return view('Result', ['question' => $question]);
+        // Check if the question exists
+        if (!$question) {
+            return redirect('/')->with('error', 'No question found.');
+        }
+
+        return view('result', compact('question'));
     }
 }
-
