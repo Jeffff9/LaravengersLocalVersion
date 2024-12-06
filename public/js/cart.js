@@ -58,36 +58,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     timeSelectorContainer.style.display = 'block';
-
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    const formatDate = (date) => {
-        return date.toISOString().split('T')[0];
-    };
-
-    document.getElementById('startDate').value = formatDate(tomorrow);
-    document.getElementById('endDate').value = formatDate(tomorrow);
+    cartEventsDiv.innerHTML = '';
 
     cart.forEach((item, index) => {
-        const isEvent = item.type === 'event';
+        // デフォルト画像URLを設定
+        const defaultImageUrl = 'https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp';
+        const imageUrl = item.image_url || defaultImageUrl;
+
         const eventHtml = `
-            <div class="accordion-item">
+            <div class="accordion-item" data-item-id="${item.id}">
                 <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#item-${index}" aria-expanded="true">
-                        <div class="d-flex align-items-center">
-                            <img src="${item.image_url}" alt="${item.title}"
-                                 class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
-                            <div>
+                        <div class="d-flex align-items-center w-100">
+                            <img src="${imageUrl}"
+                                 alt="${item.title}"
+                                 class="rounded me-3"
+                                 style="width: 60px; height: 60px; object-fit: cover;"
+                                 onerror="this.src='${defaultImageUrl}'">
+                            <div class="flex-grow-1">
                                 <h5 class="mb-0">${item.title}</h5>
                                 <small class="text-muted">
                                     <i class="bi bi-geo-alt"></i> ${item.location}
-                                    <span class="badge ${isEvent ? 'bg-info' : 'bg-success'} ms-2">
-                                        ${isEvent ? 'イベント' : '観光施設'}
-                                    </span>
                                 </small>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="badge bg-primary">${item.type === 'event' ? 'イベント' : '観光施設'}</span>
                             </div>
                         </div>
                     </button>
@@ -100,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <p class="mb-2">${item.description}</p>
                                 ${item.details ? `
                                     <div class="details-info mt-3">
-                                        ${isEvent ? `
+                                        ${item.type === 'event' ? `
                                             <p><strong>開催期間:</strong> ${item.details.start_date} ～ ${item.details.end_date}</p>
                                             <p><strong>状態:</strong> ${item.details.status}</p>
                                         ` : `

@@ -8,23 +8,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function addToCart(place) {
-    // ローカルストレージからカートを取得
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+function addToCart(item) {
+    // 現在のカートの内容を取得
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-    // 既に追加されているかチェック
-    const existingItem = cart.find(item => item.placeNumber === place.placeNumber);
+    // 同じアイテムが既にカートに存在するかチェック
+    const existingItem = cart.find(cartItem =>
+        cartItem.id === item.id && cartItem.type === item.type
+    );
 
     if (existingItem) {
-        alert('この場所は既にカートに追加されています。');
+        // 既に追加されている場合は通知
+        showNotification('この観光地は既にカートに追加されています。');
         return;
     }
 
-    // カートに追加
-    cart.push(place);
+    // 新しいアイテムをカートに追加
+    cart.push({
+        id: item.id,
+        type: item.type,
+        title: item.title,
+        location: item.location,
+        image_url: item.image_url,
+        description: item.description,
+        category: item.category,
+        order: cart.length + 1,  // デフォルトの順番
+        duration: 60  // デフォルトの滞在時間（分）
+    });
+
+    // カートを更新
     localStorage.setItem('cart', JSON.stringify(cart));
+
+    // カート数を更新（common.jsの関数を呼び出し）
     updateCartCount();
-    alert('カートに追加しました！');
+
+    // 成功通知を表示
+    showNotification('カートに追加しました！');
 }
 
 function updateCartCount() {
@@ -72,4 +91,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 */
+
+// 通知を表示する関数
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+
+    // スタイルを設定
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #333;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        animation: slideIn 0.3s ease-out;
+    `;
+
+    document.body.appendChild(notification);
+
+    // 3秒後に通知を消す
+    setTimeout(() => {
+        notification.style.animation = 'fadeOut 0.3s ease-out forwards';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// アニメーションのスタイルを追加
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
 
