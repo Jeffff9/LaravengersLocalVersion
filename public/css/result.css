@@ -1,0 +1,158 @@
+body {
+    background: linear-gradient(135deg, #4B8EC8 0%, #1B4B8F 100%);
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.result-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.result-header h2 {
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 600;
+}
+
+.result-header h2 i {
+    color: #3498db;
+    margin-right: 0.5rem;
+}
+
+.result-date {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+.result-content {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    white-space: pre-line;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.action-buttons .btn {
+    padding: 0.5rem 1.5rem;
+    min-width: 120px;
+}
+
+.btn i {
+    margin-right: 0.5rem;
+}
+
+@media print {
+    .action-buttons,
+    header {
+        display: none;
+    }
+
+    .result-card {
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .result-content {
+        background: none;
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .result-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .result-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.request-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    border: 1px solid #e1e8ed;
+}
+
+.request-content h5 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.request-content h5 i {
+    color: #3498db;
+    margin-right: 0.5rem;
+}
+
+.request-content p {
+    color: #34495e;
+    margin-bottom: 0;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+@media print {
+    .request-content {
+        border: none;
+        padding: 0;
+    }
+}
+
+.navbar {
+    background: transparent !important;
+    padding: 1rem 0;
+}
+
+.navbar .btn-outline-secondary {
+    color: white;
+    border-color: white;
+}
+
+.navbar .btn-outline-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.navbar .btn-outline-secondary i {
+    color: white;
+}

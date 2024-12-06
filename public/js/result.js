@@ -50,3 +50,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     getAIResponse();
 });
+
+function savePlan() {
+    const planContent = document.querySelector('.result-content').innerText;
+    const date = document.querySelector('.result-date').innerText;
+
+    const plan = {
+        content: planContent,
+        date: date,
+        created_at: new Date().toISOString()
+    };
+
+    // ローカルストレージに保存
+    let savedPlans = JSON.parse(localStorage.getItem('savedPlans') || '[]');
+    savedPlans.push(plan);
+    localStorage.setItem('savedPlans', JSON.stringify(savedPlans));
+
+    alert('プランを保存しました！');
+}
+
+function sharePlan() {
+    const text = document.querySelector('.result-content').innerText;
+    const encodedText = encodeURIComponent(`【観光プラン】\n\n${text}`);
+
+    // シェアメニューを表示
+    if (navigator.share) {
+        navigator.share({
+            title: '観光プラン',
+            text: text
+        }).catch(console.error);
+    } else {
+        // LINE共有にフォールバック
+        window.open('https://line.me/R/msg/text/?' + encodedText, '_blank');
+    }
+}
