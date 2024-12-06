@@ -100,6 +100,12 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.form-check-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
 .time-selector-container {
     background: white;
     border-radius: 15px;

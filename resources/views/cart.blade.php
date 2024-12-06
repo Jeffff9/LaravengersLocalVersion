@@ -2,6 +2,7 @@
 if (isset($_POST)) {
     $question = file_get_contents('php://input');
 }
+$place = ['大阪', '京都', '奈良', '神戸', '和歌山', '滋賀', '兵庫'];
 ?>
 
 <!DOCTYPE html>
@@ -41,15 +42,9 @@ if (isset($_POST)) {
                 <div class="row justify-content-center mb-4">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">
-                            <i class="bi bi-calendar-event"></i> 開始日
+                            <i class="bi bi-calendar-event"></i> 出発期日
                         </label>
                         <input type="date" id="startDate" class="form-control">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">
-                            <i class="bi bi-calendar-check"></i> 終了日
-                        </label>
-                        <input type="date" id="endDate" class="form-control">
                     </div>
                 </div>
                 <div class="row justify-content-center mb-4">
@@ -59,12 +54,9 @@ if (isset($_POST)) {
                         </label>
                         <select id="startTime" class="form-select">
                             <option value="">選択してください</option>
-                            <option value="9:00">9:00</option>
-                            <option value="10:00">10:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="12:00">12:00</option>
-                            <option value="13:00">13:00</option>
-                            <option value="14:00">14:00</option>
+                            <?php for ($i=6; $i < 16; $i++) {?>
+                            <option value=$i>{{ $i }}:00</option>
+                            <?php }?>
                         </select>
                     </div>
                     <div class="col-md-4 mb-3">
@@ -73,14 +65,67 @@ if (isset($_POST)) {
                         </label>
                         <select id="endTime" class="form-select">
                             <option value="">選択してください</option>
-                            <option value="17:00">17:00</option>
-                            <option value="18:00">18:00</option>
-                            <option value="19:00">19:00</option>
-                            <option value="20:00">20:00</option>
-                            <option value="21:00">21:00</option>
+                            <?php for ($i=16; $i < 24; $i++) {?>
+                            <option value=$i>{{ $i }}:00</option>
+                            <?php }?>
                         </select>
                     </div>
                 </div>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-building-fill-down"></i> 出発地
+                        </label>
+                        <select id="startTime" class="form-select">
+                            <option value="">選択してください</option>
+                            <?php foreach ($place as $key => $value) {?>
+                            <option value=$value>{{ $value }}</option>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-building-fill-up"></i> 到着地
+                        </label>
+                        <select id="startTime" class="form-select">
+                            <option value="">選択してください</option>
+                            <?php foreach ($place as $key => $value) {?>
+                            <option value=$value>{{ $value }}</option>
+                            <?php }?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">
+                                昼ご飯時間追加
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">
+                                夕飯時間追加
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">
+                                考えてる
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">
+                                考えてる
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="text-center">
                     <button id="createPlanButton" class="btn btn-generate-plan">
                         <i class="bi bi-calendar-check"></i> プランを生成する
