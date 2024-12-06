@@ -46,6 +46,7 @@ Route::get('/PlanDetail/{planId?}', [PlanDetailController::class, 'index'])->nam
 Route::get('/Result', [ResultController::class, 'index']);
 // Route::get('/api/places', [PlaceController::class, 'getPlaces']);
 Route::get('/PlaceDetail/{id}', [PlaceController::class, 'detail'])->name('place.detail');
+Route::post('/api/generate-plan', [ResultController::class, 'generatePlan']);
 
 
 

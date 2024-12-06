@@ -7,8 +7,6 @@ createPlanButton.onclick = function(){
     if (cart.length === 0) {
         alert('プランを生成するにはイベントを追加してください。');
         return;
-    }else{
-        window.location.href="/Result";
     }
 
     for(let i = 0; i < cart.length; i++){
@@ -17,8 +15,9 @@ createPlanButton.onclick = function(){
         const item = cart[i];
         priority.push({
             title: item.title,
-            priority: priorityValue,
-            duration: durationSelect
+            priority: priorityValue || '1',
+            duration: durationSelect || '60',
+            details: item.details
         });
     }
 
@@ -26,23 +25,55 @@ createPlanButton.onclick = function(){
         return `${place.title}（優先度: ${place.priority}, 滞在時間: ${place.duration}分）`;
     }).join('、');
 
-    const question = `明日土曜日、${placesList} に行きたい、ツアーを作ってください。目的地の定休日をチェックしてください。日本語で回答してください。明日は定休日になれば、ツアーを作らないでください。`;
-    // localStorage.setItem('question',str);
-    alert(str);
-    fetch("cart.php",{
-        "method": "POST",
-        "headers": {
-            "Content-Type": "application/json; charset=utf-8"
+    const startDate = document.getElementById('startDate').value;
+    const startTime = document.getElementById('startTime').value;
+    const endTime = document.getElementById('endTime').value;
+
+    const question = `
+以下の場所を訪れるプランを作成してください：
+${placesList}
+
+条件：
+- 訪問日: ${startDate}
+- 開始時間: ${startTime}
+- 終了時間: ${endTime}
+
+以下の情報も考慮してプランを作成してください：
+${priority.map(place => `
+- ${place.title}
+  - 営業時間: ${place.details?.openingHours || '情報なし'}
+  - アクセス: ${place.details?.access || '情報なし'}
+`).join('\n')}
+
+日本語で具体的な時間のスケジュールを作成してください。
+`;
+
+    localStorage.setItem('question', question);
+
+    fetch("/api/generate-plan", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
         },
-        body: `question=${encodeURIComponent(question)}`
+        body: JSON.stringify({ question: question })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
-        console.log('Success:', data);
-        alert(data.message); // Shows success message from the server
+        if (data.success) {
+            window.location.href = "/Result";
+        } else {
+            alert('プランの生成に失敗しました。');
+        }
     })
     .catch(error => {
         console.error('Error:', error);
+        alert('エラーが発生しました。もう一度お試しください。');
     });
 }
 
@@ -52,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeSelectorContainer = document.querySelector('.time-selector-container');
 
     if (cart.length === 0) {
-        cartEventsDiv.innerHTML = '<p class="text-muted">カートにイベントが追加されていません。</p>';
+        cartEventsDiv.innerHTML = '<p class="text-muted">カートにイベントが追加さ���ていません。</p>';
         timeSelectorContainer.style.display = 'none';
         return;
     }
