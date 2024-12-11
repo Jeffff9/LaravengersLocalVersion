@@ -1,7 +1,13 @@
 const createPlanButton = document.getElementById('createPlanButton');
 
-createPlanButton.onclick = function(){
+createPlanButton.onclick = function () {
+    const startDate = document.getElementById('startDate')?.value || '';
+    const startTime = document.getElementById('startTime')?.value || '';
+    const endTime = document.getElementById('endTime')?.value || '';
+    const departurePlace = document.getElementById('departurePlace')?.value || '';
+    const destination = document.getElementById('destination')?.value || '';
     const priority = [];
+
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
     if (cart.length === 0) {
@@ -9,7 +15,7 @@ createPlanButton.onclick = function(){
         return;
     }
 
-    for(let i = 0; i < cart.length; i++){
+    for (let i = 0; i < cart.length; i++) {
         const durationSelect = document.getElementById(`durationSelect${i}`)?.value;
         const priorityValue = document.getElementById(`placePriority${i}`)?.value;
         const item = cart[i];
@@ -25,9 +31,28 @@ createPlanButton.onclick = function(){
         return `${place.title}（優先度: ${place.priority}, 滞在時間: ${place.duration}分）`;
     }).join('、');
 
-    const startDate = document.getElementById('startDate').value;
-    const startTime = document.getElementById('startTime').value;
-    const endTime = document.getElementById('endTime').value;
+/////////////////////セット///////////////////////
+    const fields = {
+        startDate: '訪問日',
+        startTime: '開始時間',
+        endTime: '終了時間',
+        departurePlace: '出発地',
+        destination: '到着地'
+    };
+
+    const errorMessage = [];
+    for (const [fieldId, fieldName] of Object.entries(fields)) {
+        const fieldValue = document.getElementById(fieldId)?.value || '';
+        if (!fieldValue) {
+            errorMessage.push(fieldName);
+        }
+    }
+
+    if (errorMessage.length > 0) {
+        alert(errorMessage.join('、') + "を選択してください。");
+        return;
+    }
+///////////////////////////////////////////////////
 
     const question = `
 以下の場所を訪れるプランを作成してください：
@@ -35,8 +60,10 @@ ${placesList}
 
 条件：
 - 訪問日: ${startDate}
-- 開始時間: ${startTime}
-- 終了時間: ${endTime}
+- 開始時間: ${startTime}時
+- 終了時間: ${endTime}時
+- 出発地: ${departurePlace}
+- 到着地: ${destination}
 
 以下の情報も考慮してプランを作成してください：
 ${priority.map(place => `
@@ -58,26 +85,26 @@ ${priority.map(place => `
         },
         body: JSON.stringify({ question: question })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.success) {
-            window.location.href = "/Result";
-        } else {
-            alert('プランの生成に失敗しました。');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('エラーが発生しました。もう一度お試しください。');
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.href = "/Result";
+            } else {
+                alert('プランの生成に失敗しました。');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('エラーが発生しました。もう一度お試しください。');
+        });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const cartEventsDiv = document.getElementById('cartEvents');
     const timeSelectorContainer = document.querySelector('.time-selector-container');

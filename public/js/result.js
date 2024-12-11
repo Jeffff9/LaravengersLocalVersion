@@ -1,5 +1,3 @@
-//xai apikey: xai-SYKxAQzMo26Eb1bk0joxnUPnrMmSUtmkWIvMi3KqhHEP24S3UsqEhKghYrlmTJNQPotIOxP1k8yrYbPA
-
 document.addEventListener('DOMContentLoaded', function () {
     const result = document.getElementById('result');
 
@@ -16,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': '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'
+                    'Authorization': 'Bearer ' + env('OPENAI_API_KEY')
                 },
                 body: JSON.stringify({
                     model: "gpt-4o-mini",
