@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,7 +15,7 @@
             @if($planId === 'osaka')
                 <!-- 大阪プラン -->
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">大阪での一日遊びプラン</h1>
                             <div class="plan-description">
@@ -55,17 +56,11 @@
                                        style="color: #1B4B8F;">
                                         JR「天王寺駅」、地下鉄「動物園前駅」から徒歩5分
                                     </a>
-                                    <span class="place-link-container ms-3">
-                                        @php
-                                            $matchingPlace = $places->firstWhere('name', '天王寺動物園');
-                                        @endphp
-                                        @if($matchingPlace)
-                                            <a href="{{ route('placeDetail', ['id' => $matchingPlace->id]) }}"
-                                               class="btn btn-sm btn-outline-primary ms-2">
-                                                <i class="bi bi-info-circle"></i> 詳細を見る
-                                            </a>
-                                        @endif
-                                    </span>
+                                    {{-- <span class="place-link-container ms-3">
+                                        <a href="{{ route('Place.show', ['Place' => 1]) }}" class="btn btn-sm btn-outline-primary ms-2">
+                                            <i class="bi bi-info-circle"></i> 詳細を見る
+                                        </a>
+                                    </span> --}}
                                 </p>
                             </div>
                         </div>
@@ -172,7 +167,7 @@
             @elseif($planId === 'kobe')
                 <!-- 神戸プラン -->
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">神戸一日満喫プラン</h1>
                             <div class="plan-description">
@@ -275,7 +270,7 @@
             @elseif($planId === 'kyoto')
                 <!-- 京都プラン -->
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">京都一日観光プラン</h1>
                             <div class="plan-description">
@@ -378,7 +373,7 @@
             @elseif($planId === 'nara')
                 <!-- 奈良プラン -->
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">奈良一日散策プラン</h1>
                             <div class="plan-description">
@@ -480,7 +475,7 @@
                 </div>
             @elseif($planId === 'wakayama')
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">和歌山一日観光プラン</h1>
                             <div class="plan-description">
@@ -545,7 +540,7 @@
                             <h2><i class="bi bi-sun"></i> 午後</h2>
                             <div class="activity" data-place-name="和歌山マリーナシティ">
                                 <h3>2:00 PM - 和歌山マリーナシティ</h3>
-                                <p>黒潮市場でショッピングと海鮮を楽しむ。</p>
+                                <p>黒潮市場でショッピングと海���を楽しむ。</p>
                                 <p class="access">
                                     <i class="bi bi-train-front"></i>
                                     <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode('和歌山マリーナシティ') }}"
@@ -578,7 +573,7 @@
                 </div>
             @elseif($planId === 'shiga')
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">滋賀・琵琶湖一日プラン</h1>
                             <div class="plan-description">
@@ -640,15 +635,9 @@
                                     JR「彦根駅」からバスで15分
                                 </a>
                                 <span class="place-link-container ms-3">
-                                    @php
-                                        $matchingPlace = $places->firstWhere('name', '彦根城');
-                                    @endphp
-                                    @if($matchingPlace)
-                                        <a href="{{ route('placeDetail', ['id' => $matchingPlace->id]) }}"
-                                           class="btn btn-sm btn-outline-primary ms-2">
-                                            <i class="bi bi-info-circle"></i> 詳細を見る
-                                        </a>
-                                    @endif
+                                    <a href="{{ route('Place.show', ['Place' => 1]) }}" class="btn btn-sm btn-outline-primary ms-2">
+                                        <i class="bi bi-info-circle"></i> 詳細を見る
+                                    </a>
                                 </span>
                             </p>
                         </div>
@@ -673,7 +662,7 @@
                 </div>
             @elseif($planId === 'arashiyama')
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">京都嵐山一日プラン</h1>
                             <div class="plan-description">
@@ -771,7 +760,7 @@
                 </div>
             @elseif($planId === 'usj')
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">USJ満喫プラン</h1>
                             <div class="plan-description">
@@ -842,7 +831,7 @@
                 </div>
             @elseif($planId === 'arima')
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">有馬温泉癒しプラン</h1>
                             <div class="plan-description">
@@ -922,7 +911,7 @@
                 </div>
             @elseif($planId === 'narapark')
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">奈良公園癒しプラン</h1>
                             <div class="plan-description">
@@ -963,15 +952,9 @@
                                         近鉄「奈良駅」から徒歩5分
                                     </a>
                                     <span class="place-link-container ms-3">
-                                        @php
-                                            $matchingPlace = $places->firstWhere('name', '奈良公園');
-                                        @endphp
-                                        @if($matchingPlace)
-                                            <a href="{{ route('placeDetail', ['id' => $matchingPlace->id]) }}"
-                                               class="btn btn-sm btn-outline-primary ms-2">
-                                                <i class="bi bi-info-circle"></i> 詳細を見る
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('Place.show', ['Place' => 1]) }}" class="btn btn-sm btn-outline-primary ms-2">
+                                            <i class="bi bi-info-circle"></i> 詳細を見る
+                                        </a>
                                     </span>
                                 </p>
                             </div>
@@ -1031,7 +1014,7 @@
                 </div>
             @elseif($planId === 'amanohashidate')
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">天橋立絶景プラン</h1>
                             <div class="plan-description">
@@ -1133,7 +1116,7 @@
                 </div>
             @elseif($planId === 'himeji')
                 <div class="plan-section mb-5">
-                    <div class="plan-header">
+                    <div class="plan-header" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{{ asset($backgroundImage) }}');">
                         <div class="header-content">
                             <h1 class="display-4">姫路城探訪プラン</h1>
                             <div class="plan-description">

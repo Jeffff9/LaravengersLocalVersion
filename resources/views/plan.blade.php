@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -31,10 +32,10 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col">
                     <div class="card">
-                        <img src="https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp"
-                            class="card-img-top card-img-fixed card-img-fixed" alt="">
+                        <img src="{{ asset('images/plans/osaka_plans.jpg') }}"
+                            class="card-img-top card-img-fixed" alt="大阪の観光スポット">
                         <div class="card-body">
-                            <h5 class="card-title">大阪のプラン<</h5>
+                            <h5 class="card-title">大阪のプラン</h5>
                             <p class="card-text">大阪一日遊び</p>
                             <a href="PlanDetail/osaka" class="btn btn-primary">詳細</a>
                         </div>
@@ -43,7 +44,7 @@
 
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/kobe_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="">
                         <div class="card-body">
                             <h5 class="card-title">神戸のプラン</h5>
@@ -54,7 +55,7 @@
                 </div>
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/kyoto_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="">
                         <div class="card-body">
                             <h5 class="card-title">京都のプラン</h5>
@@ -65,7 +66,7 @@
                 </div>
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/nara_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="">
                         <div class="card-body">
                             <h5 class="card-title">奈良のプラン</h5>
@@ -76,7 +77,7 @@
                 </div>
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/wakayama_plans.jpeg') }}"
                             class="card-img-top card-img-fixed" alt="和歌山城と桜">
                         <div class="card-body">
                             <h5 class="card-title">和歌山のプラン</h5>
@@ -88,7 +89,7 @@
 
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/shiga_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="琵琶湖と比叡山">
                         <div class="card-body">
                             <h5 class="card-title">滋賀のプラン</h5>
@@ -100,7 +101,7 @@
 
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/kyoto_arashiyama_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="嵐山の竹林">
                         <div class="card-body">
                             <h5 class="card-title">京都嵐山プラン</h5>
@@ -112,7 +113,7 @@
 
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/usj_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="USJ">
                         <div class="card-body">
                             <h5 class="card-title">USJプラン</h5>
@@ -124,7 +125,7 @@
 
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/ArimaOnsen_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="有馬温泉">
                         <div class="card-body">
                             <h5 class="card-title">有馬温泉プラン</h5>
@@ -136,7 +137,7 @@
 
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/narakoenn_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="奈良公園">
                         <div class="card-body">
                             <h5 class="card-title">奈良公園プラン</h5>
@@ -148,7 +149,7 @@
 
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/Amanohashidate_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="天橋立">
                         <div class="card-body">
                             <h5 class="card-title">天橋立プラン</h5>
@@ -160,7 +161,7 @@
 
                 <div class="col">
                     <div class="card">
-                        <img src="https://img.rurubu.jp/img_srw/andmore/images/0000470187/bOrNpVYpgqcmW22RtTfJGdOpfahZ53skyj05kdFR.jpg"
+                        <img src="{{ asset('images/plans/HimejiCastle_plans.jpg') }}"
                             class="card-img-top card-img-fixed" alt="姫路城">
                         <div class="card-body">
                             <h5 class="card-title">姫路城プラン</h5>

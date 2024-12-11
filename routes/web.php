@@ -34,7 +34,9 @@ Route::get('/PlaceDetail', [PlaceDetailController::class, 'index']);
 Route::get('/Cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/Cart/post', [CartController::class, 'post']);
 Route::get('/Plan', [PlanController::class, 'index']);
-Route::get('/PlanDetail', [PlanDetailController::class, 'index']);
+Route::get('/PlanDetail/{planId}', [PlanDetailController::class, 'index'])
+    ->where('planId', 'osaka|kobe|kyoto|nara|wakayama|shiga|arashiyama|usj|arima|narapark|amanohashidate|himeji')
+    ->name('plan.detail');
 Route::get('/register',[RegisterController::class,'showRegisterForm'])->name('register');
 Route::post('/register',[RegisterController::class,'register']);
 Route::get('/password/reset',[ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
