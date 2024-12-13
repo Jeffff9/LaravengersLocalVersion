@@ -108,7 +108,7 @@
                             <div class="card h-100"
                                  data-category="{{ $place->characteristics }}"
                                  data-area="{{ $place->address }}">
-                                <img src="{{ $place->im1}}"
+                                <img src="{{ $place->im1 ?? 'https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp'}}"
                                      class="card-img-top"
                                      style="height: 200px; object-fit: cover; width: 100%;"
                                      alt="{{$place->placeName}}">

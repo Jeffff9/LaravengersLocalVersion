@@ -190,11 +190,20 @@
                                 <p>{{$place->longDetail}}</p>
 
                                 <!-- カートボタンを詳細の下に配置 -->
-						        <button onclick="addToCart(placeData)"
-                            		class="cart-button position-absolute top-0 end-0"
-                            		style="margin: 20px; background-color: #1B4B8F; color: white;">
-                        		<i class="bi bi-cart-plus"></i> カートに追加
-                    			</button>
+						        <button type="button"
+                                                class="btn btn-primary btn-sm"
+                                                style="z-index: 1;"
+                                                onclick="addToCart({
+                                                    id: '{{$place->placeNumber}}',
+                                                    title: '{{$place->placeName}}',
+                                                    description: '{{$place->shortDetail}}',
+                                                    image_url: '{{ $place->im1 ?? 'https://prd-static.gltjp.com/glt/data/article/21000/20382/20230824_130026_34f0e5b2_w1920.webp' }}',
+                                                    location: '{{$place->address}}',
+                                                    category: '{{$place->characteristics}}',
+                                                    type: 'place'
+                                                })">
+                                            <i class="bi bi-cart-plus"></i> カートに追加
+                                </button>
                             </div>
                         </div>
                     </div>
