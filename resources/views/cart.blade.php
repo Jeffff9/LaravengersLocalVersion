@@ -42,7 +42,7 @@ $place = ['大阪', '京都', '奈良', '神戸', '和歌山', '滋賀', '兵庫
                 <div class="row justify-content-center mb-4">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">
-                            <i class="bi bi-calendar-event"></i> 出発期日
+                            <i class="bi bi-calendar-event"></i> 出発期日(＊必要)
                         </label>
                         <input type="date" id="startDate" class="form-control">
                     </div>
@@ -50,55 +50,56 @@ $place = ['大阪', '京都', '奈良', '神戸', '和歌山', '滋賀', '兵庫
                 <div class="row justify-content-center mb-4">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">
-                            <i class="bi bi-clock"></i> 開始時間
+                            <i class="bi bi-clock"></i> 開始時間(＊必要)
                         </label>
                         <select id="startTime" class="form-select">
                             <option value="">選択してください</option>
-                            <?php for ($i=6; $i < 16; $i++) {?>
-                            <option value=$i>{{ $i }}:00</option>
-                            <?php }?>
+                            <?php for ($i = 6; $i < 16; $i++): ?>
+                                <option value="<?= htmlspecialchars($i) ?>"><?= htmlspecialchars($i) ?>:00</option>
+                            <?php endfor; ?>
                         </select>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">
-                            <i class="bi bi-clock-history"></i> 終了時間
+                            <i class="bi bi-clock-history"></i> 終了時間(＊必要)
                         </label>
                         <select id="endTime" class="form-select">
                             <option value="">選択してください</option>
-                            <?php for ($i=16; $i < 24; $i++) {?>
-                            <option value=$i>{{ $i }}:00</option>
-                            <?php }?>
+                            <?php for ($i = 16; $i < 24; $i++): ?>
+                                <option value="<?= htmlspecialchars($i) ?>"><?= htmlspecialchars($i) ?>:00</option>
+                            <?php endfor; ?>
                         </select>
                     </div>
                 </div>
+
                 <div class="row justify-content-center mb-4">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">
-                            <i class="bi bi-building-fill-down"></i> 出発地
+                            <i class="bi bi-building-fill-down"></i> 出発地(＊必要)
                         </label>
-                        <select id="startTime" class="form-select">
+                        <select id="departurePlace" class="form-select">
                             <option value="">選択してください</option>
-                            <?php foreach ($place as $key => $value) {?>
-                            <option value=$value>{{ $value }}</option>
-                            <?php }?>
+                            <?php foreach ($place as $key => $value): ?>
+                                <option value="<?= htmlspecialchars($value) ?>"><?= htmlspecialchars($value) ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label">
-                            <i class="bi bi-building-fill-up"></i> 到着地
+                            <i class="bi bi-building-fill-up"></i> 到着地(＊必要)
                         </label>
-                        <select id="startTime" class="form-select">
+                        <select id="destination" class="form-select">
                             <option value="">選択してください</option>
-                            <?php foreach ($place as $key => $value) {?>
-                            <option value=$value>{{ $value }}</option>
-                            <?php }?>
+                            <?php foreach ($place as $key => $value): ?>
+                                <option value="<?= htmlspecialchars($value) ?>"><?= htmlspecialchars($value) ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
                 <div class="row justify-content-center mb-4">
                     <div class="col-md-4 mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <input class="form-check-input" type="checkbox" value="" id="lunchtime">
                             <label class="form-check-label" for="flexCheckIndeterminate">
                                 昼ご飯時間追加
                             </label>

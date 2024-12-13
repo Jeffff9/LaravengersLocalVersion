@@ -34,6 +34,7 @@
                 <div class="request-content">
                     <h5><i class="bi bi-search"></i> リクエスト内容</h5>
                     <p>{{$question}}</p>
+                    <p>{{$result}}</p>
                 </div>
 
                 <div class="result-content">
