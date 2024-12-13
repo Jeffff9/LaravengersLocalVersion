@@ -32,6 +32,10 @@ class PlaceController extends Controller
         // 6件ごとにページネーション
         $places = $query->paginate(6);
 
+        foreach ($places as $place) {
+            $place->im1 = 'data:image/jpeg;base64,' . base64_encode($place->im1);
+        }
+
         // 場所の種類（characteristics）とエリア（address）の一覧を取得
         $characteristics = DB::table('places')
             ->select('characteristics')
@@ -54,9 +58,16 @@ class PlaceController extends Controller
         // IDに基づいて場所の詳細情報を取得
         $place = DB::table('places')->where('placeNumber', $id)->first();
 
-        if (!$place) {
-            abort(404); // 場所が見つからない場合は404エラー
+        if ($place){
+            $place->im1 = 'data:image/jpeg;base64,' .base64_encode( $place->im1);
+            $place->im2 = 'data:image/jpeg;base64,' . base64_encode( $place->im2);
+            $place->im3 = 'data:image/jpeg;base64,' . base64_encode( $place->im3);
+            $place->im4 = 'data:image/jpeg;base64,' . base64_encode( $place->im4);
+        } else {
+            // Handle the case where no record is found
+            return redirect()->back()->with('error', '場所が見つかりません。');
         }
+
 
         return view('placeDetail', compact('place'));
     }
