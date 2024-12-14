@@ -9,162 +9,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slideshow.css') }}">
-    <style>
-        body {
-            background: linear-gradient(135deg, #4B8EC8 0%, #1B4B8F 100%);
-            color: white;
-            min-height: 100vh;
-        }
-
-        main {
-            padding-top: 100px;
-            padding-bottom: 50px;
-        }
-
-        /* タイトルスタイル */
-        h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            margin-bottom: 2rem;
-            color: #1B4B8F;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        /* コンテ��ツカード */
-        .content-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        /* スライドショーコンテナ */
-        .slide-container {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
-        }
-
-        /* 詳細情報スタイル */
-        .detail-section {
-            color: #333;
-            line-height: 1.8;
-        }
-
-        .detail-section h3 {
-            color: #1B4B8F;
-            font-weight: 600;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .detail-section p {
-            color: #555;
-            font-size: 1.1rem;
-            margin-bottom: 1.2rem;
-            line-height: 1.8;
-        }
-
-        .detail-section a {
-            color: #D64B29;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .detail-section a:hover {
-            color: #1B4B8F;
-        }
-
-        /* 地図コンテナ */
-        .map-container {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 30px;
-        }
-
-        /* カートボタン */
-        .cart-button {
-            background-color: #1B4B8F;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(27, 75, 143, 0.2);
-        }
-
-        .cart-button:hover {
-            background-color: #154178;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(27, 75, 143, 0.3);
-        }
-
-        .cart-button i {
-            font-size: 1.3rem;
-        }
-
-        /* アニメーション */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* モーダルスタイル */
-        .modal-content {
-            background: white;
-            border-radius: 15px;
-        }
-
-        .modal-header {
-            border-bottom: none;
-            padding: 20px 30px;
-        }
-
-        .modal-body {
-            padding: 20px 30px;
-            color: #333;
-        }
-
-        .modal-footer {
-            border-top: none;
-            padding: 20px 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/placeDetail.css') }}">
 </head>
 
 <body>
     <header id="header"></header>
 
-    <main>
+    <main></main>
         <div class="container">
-            <h2>{{$place->placeName}}</h2>
+            <h2>{{ $place->placeName }}</h2>
             <div class="content-card">
                 <div class="row">
                     <!-- 左側：スライドショー -->
                     <div class="col-md-6">
                         <div class="slide-container">
                             <div class="slides">
-                                <img src="{{$place->im1}}" class="active">
-                                <img src="{{$place->im2}}">
-                                <img src="{{$place->im3}}">
-                                <img src="{{$place->im4}}">
+                                <img src="{{ $place->im1 }}" class="active">
+                                <img src="{{ $place->im2 }}">
+                                <img src="{{ $place->im3 }}">
+                                <img src="{{ $place->im4 }}">
                             </div>
 
                             <div class="buttons">
@@ -187,14 +50,13 @@
                         <div class="detail-section">
                             <div class="detail-content">
                                 <h3>詳細紹介</h3>
-                                <p>{{$place->longDetail}}</p>
+                                <p>{{ $place->longDetail }}</p>
 
                                 <!-- カートボタンを詳細の下に配置 -->
-						        <button onclick="addToCart(placeData)"
-                            		class="cart-button position-absolute top-0 end-0"
-                            		style="margin: 20px; background-color: #1B4B8F; color: white;">
-                        		<i class="bi bi-cart-plus"></i> カートに追加
-                    			</button>
+                                <button onclick="addToCart(placeData)" class="cart-button position-absolute top-0 end-0"
+                                    style="margin: 20px; background-color: #1B4B8F; color: white;">
+                                    <i class="bi bi-cart-plus"></i> カートに追加
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -207,9 +69,18 @@
                     <div class="content-card info-card">
                         <h3>営業情報</h3>
                         <div class="info-content">
-                            <p><strong>営業時間：</strong>{{$place->openningHours}}</p>
-                            <p><strong>休館日：</strong>無休</p>
-                            <a href="{{$place->websiteLink}}" target="_blank" class="website-link">
+                            <p><strong>営業時間：</strong>{{ $place->openningHours }}</p>
+                            <p><strong>料金：</strong>
+                            @if($place->placeName === '天王寺動物園')
+                                大人500円、子供：200円
+                            @elseif($place->placeName === '大阪城')
+                                大人600円、中高生450円、小学生300円
+                            @else
+                                料金については公式サイトをご確認ください
+                            @endif
+                            </p>
+                            <p><strong>アクセス：</strong>{{ $place->access ?? '地下鉄御堂筋線動物園前駅より徒歩5分' }}</p>
+                            <a href="{{ $place->websiteLink }}" target="_blank" class="website-link">
                                 <i class="fas fa-external-link-alt"></i> 公式サイトはこちら
                             </a>
                         </div>
@@ -219,7 +90,9 @@
                     <div class="content-card map-card">
                         <h3>アクセス</h3>
                         <div class="map-container">
-                            {!! $place->googleMapLink !!}
+                            <div class="map-wrapper">
+                                {!! $place->googleMapLink !!}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -235,31 +108,22 @@
     <script src="{{ asset('js/slideshow.js') }}"></script>
     <script>
         const placeData = {
-            id: 1,
-            title: '天王寺動物園',
-            description: '天王寺動物園は、大阪市にある歴史ある動物園で、1915年に開園しました。総面積は約11ヘクタールあり、約180種類、1000頭以上の動物が飼育されています。',
-            image_url: 'https://www.akira-seitai2.com/wp-content/uploads/2021/02/pixta_70263615_M-1536x1024.jpg',
-            location: '大阪市天王寺区',
-            category: '観光施設',
+            id: {{ $place->placeNumber }},
+            title: '{{ $place->placeName }}',
+            description: '{{ $place->shortDetail }}',
+            image_url: '{{ $place->im1 }}',
+            location: '{{ $place->detailAddress }}',
+            category: '{{ $place->characteristics }}',
             type: 'place',
             details: {
-                openingHours: '9:30～17:00 　5・9月の土日祝日は～18:00　※いずれも入園は一時間前まで',
-                price: '大人：500円、子供：200円',
-                access: '地下鉄御堂筋線動物園前駅より徒歩5分',
+                openingHours: '{{ $place->openningHours }}',
+                price: @json($place->placeName === '天王寺動物園' ? '大人500円、子供：200円' :
+                       ($place->placeName === '大阪城' ? '大人600円、中高生450円、小学生300円' :
+                       '料金については公式サイトをご確認ください')),
+                access: '{{ $place->access ?? "地下鉄御堂筋線動物園前駅より徒歩5分" }}',
                 facilities: ['駐車場', 'レストラン', 'お土産店'],
-                closedDays: '月曜日（祝日の場合は翌日）、年末年始（12月29日～1月1日）',
-                description: `
-                    天王寺動物園は、大阪市にある歴史ある動物園で、1915年に開園しました。
-                    総面積は約11ヘクタールあり、約180種類、1000頭以上の動物が飼育されています。
-                    園内はアフリカサバンナやアジアの森林など、動物たちの自然環境を再現したエリアが設けられ、
-                    動物の生態を身近に感じられるよう工夫されています。
-                `,
-                highlights: [
-                    'ライオン、ゾウ、キリン、ホッキョクグマなどの人気動物',
-                    '動物の食事タイムや触れ合いイベント',
-                    '天王寺公園に隣接'
-                ],
-                website: 'https://www.tennojizoo.jp/'
+                description: '{{ $place->longDetail }}',
+                website: '{{ $place->websiteLink }}'
             }
         };
 
