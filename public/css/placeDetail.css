@@ -19,7 +19,7 @@ h2 {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* コンテ��ツカード */
+/* コンテンツカード */
 .content-card {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
@@ -68,12 +68,61 @@ h2 {
     color: #1B4B8F;
 }
 
-/* 地図コンテナ */
-.map-container {
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+/* 情報行のスタイル調整 */
+.info-row {
     margin-top: 30px;
+}
+
+/* 情報カードの調整 */
+.info-card, .map-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 地図コンテナの調整 */
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* 固定の高さを設定 */
+    margin-top: 15px;
+}
+
+.map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* 情報コンテンツの調整 */
+.info-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #333;
+}
+
+/* 営業情報とアクセスのカード内の余白調整 */
+.info-card h3, .map-card h3 {
+    margin-bottom: 15px;
+    color: #1B4B8F;
+}
+
+.info-content p {
+    margin-bottom: 10px;
+}
+
+.info-content a {
+    margin-top: auto;
+    color: #D64B29;
+}
+
+.info-content a:hover {
+    color: #1B4B8F;
 }
 
 /* カートボタン */
