@@ -53,11 +53,10 @@
                                 <p>{{ $place->longDetail }}</p>
 
                                 <!-- カートボタンを詳細の下に配置 -->
-						        <button onclick="addToCart(placeData)"
-                            		class="cart-button position-absolute top-0 end-0"
-                            		style="margin: 20px; background-color: #1B4B8F; color: white;">
-                        		<i class="bi bi-cart-plus"></i> カートに追加
-                    			</button>
+                                <button onclick="addToCart(placeData)" class="cart-button position-absolute top-0 end-0"
+                                    style="margin: 20px; background-color: #1B4B8F; color: white;">
+                                    <i class="bi bi-cart-plus"></i> カートに追加
+                                </button>
                             </div>
                         </div>
                     </div>
