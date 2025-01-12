@@ -1,53 +1,40 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const result = document.getElementById('result');
+document.addEventListener('DOMContentLoaded', () => {
+    const resultcontent = document.querySelector('.result-content');
 
-    async function getAIResponse() {
-        const question = localStorage.getItem('question');
+    const question = localStorage.getItem('question');
 
-        if (!question) {
-            result.textContent = '質問が見つかりませんでした。';
-            return;
-        }
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        try {
-            const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + env('OPENAI_API_KEY')
-                },
-                body: JSON.stringify({
-                    model: "gpt-4o-mini",
-                    messages: [{ role: "user", content: JSON.stringify(question) }],
-                    temperature: 1,
-                    max_tokens: 2000,
-                    top_p: 1,
-                    frequency_penalty: 0,
-                    presence_penalty: 0,
-                }),
-            });
-
+    fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({
+            messages: [{ role: 'user', content: question }],
+            model: 'llama-3.1-sonar-large-128k-online'
+        })
+    })
+        .then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
-            const data = await response.json();
-            if (data.choices && data.choices.length > 0) {
-                const message = data.choices[0].message.content;
-                const paragraph = document.createElement('p');
-                paragraph.textContent = message;
-                result.appendChild(paragraph);
-                console.log(message);
+            return response.json();
+        })
+        .then(data => {
+            if (data.choices && data.choices[0] && data.choices[0].message.content) {
+                resultcontent.textContent = data.choices[0].message.content;
             } else {
-                result.textContent = '回答が得られませんでした。';
+                resultcontent.textContent = 'No valid response from API.';
             }
-        } catch (error) {
-            console.error('エラーが発生しました:', error);
-            result.textContent = '回答の取得に失敗しました。後ほど再度お試しください。';
-        }
-    }
-    getAIResponse();
+        })
+        .catch(err => {
+            console.error(err);
+            ai.textContent = 'An error occurred. Please check the console for details.';
+        });
 });
+
 
 function savePlan() {
     const planContent = document.querySelector('.result-content').innerText;

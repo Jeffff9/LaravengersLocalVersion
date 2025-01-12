@@ -6,6 +6,8 @@ createPlanButton.onclick = function () {
     const endTime = document.getElementById('endTime')?.value || '';
     const departurePlace = document.getElementById('departurePlace')?.value || '';
     const destination = document.getElementById('destination')?.value || '';
+    const lunchTime = document.getElementById('lunchTime');
+    const dinnerTime = document.getElementById('dinnerTime');
     const priority = [];
 
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -46,13 +48,17 @@ createPlanButton.onclick = function () {
         if (!fieldValue) {
             errorMessage.push(fieldName);
         }
-    }
+    };
 
     if (errorMessage.length > 0) {
         alert(errorMessage.join('、') + "を選択してください。");
         return;
     }
 ///////////////////////////////////////////////////
+    const lunchTimeInfo = '';
+    if(lunchTime.checked){
+        lunchTimeInfo = 'ランチタイムを追加して'
+    };
 
     const question = `
 以下の場所を訪れるプランを作成してください：
@@ -64,6 +70,7 @@ ${placesList}
 - 終了時間: ${endTime}時
 - 出発地: ${departurePlace}
 - 到着地: ${destination}
+${lunchTimeInfo}
 
 以下の情報も考慮してプランを作成してください：
 ${priority.map(place => `
@@ -75,33 +82,8 @@ ${priority.map(place => `
 日本語で具体的な時間のスケジュールを作成してください。
 `;
 
-    localStorage.setItem('question', question);
-
-    fetch("/api/generate-plan", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
-        },
-        body: JSON.stringify({ question: question })
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                window.location.href = "/Result";
-            } else {
-                alert('プランの生成に失敗しました。');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('エラーが発生しました。もう一度お試しください。');
-        });
+    localStorage.setItem('question', JSON.stringify(question));
+    window.location.href = "/Result";
 }
 
 document.addEventListener('DOMContentLoaded', function () {

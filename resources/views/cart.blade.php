@@ -99,13 +99,13 @@ $place = ['大阪', '京都', '奈良', '神戸', '和歌山', '滋賀', '兵庫
                 <div class="row justify-content-center mb-4">
                     <div class="col-md-4 mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="lunchtime">
+                            <input class="form-check-input" type="checkbox" value="" id="lunchTime">
                             <label class="form-check-label" for="flexCheckIndeterminate">
                                 昼ご飯時間追加
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <input class="form-check-input" type="checkbox" value="" id="dinnerTime">
                             <label class="form-check-label" for="flexCheckIndeterminate">
                                 夕飯時間追加
                             </label>

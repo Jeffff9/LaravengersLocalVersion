@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\TestController;
 
 
 /*
@@ -46,10 +47,11 @@ Route::get('/Event/{id}', [EventController::class, 'detail'])->name('events.deta
 Route::get('/placeDetail/{id}', [PlaceDetailController::class, 'show'])->name('placeDetail');
 Route::get('/PlanDetail/{planId?}', [PlanDetailController::class, 'index'])->name('plan.detail');
 Route::get('/Result', [ResultController::class, 'index']);
-// Route::get('/api/places', [PlaceController::class, 'getPlaces']);
+Route::post('/api/chat', [ResultController::class, 'chat']);
 Route::get('/PlaceDetail/{id}', [PlaceController::class, 'detail'])->name('place.detail');
 Route::post('/api/generate-plan', [ResultController::class, 'generatePlan']);
-
+Route::get('/Test', [TestController::class, 'index']);
+Route::post('/api/chat', [TestController::class, 'chat']);
 
 
 
