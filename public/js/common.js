@@ -33,13 +33,7 @@ function createHeader() {
                         </li>
                     </ul>
 
-                    <!-- 検索フォームを改善 -->
-                    <div class="search-box me-2">
-                        <div class="search-wrapper">
-                            <i class="bi bi-search search-icon"></i>
-                            <input type="search" class="search-input" placeholder="検索...">
-                        </div>
-                    </div>
+
 
                     <div class="nav-buttons d-flex align-items-center">
                         <div class="nav-item">
