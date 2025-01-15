@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: "神戸イルミナージュ",
             description: "約100万球のLEDで彩られる光の王国。音楽とシンクロした幻想的な光の世界を体験できます。",
             image_url: "/images/events/default_event.jpg",
-            category: "イルミ���ーション",
+            category: "イルミネーション",
             start_date: "2024-11-01",
             end_date: "2024-12-25",
             location: "神戸市立須磨離宮公園",
@@ -229,46 +229,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function refreshEvents() {
         const eventList = document.getElementById('event-list');
-        const keyword = document.getElementById('keyword').value.toLowerCase();
-        const area = document.getElementById('area').value;
-        const category = document.getElementById('category').value;
 
-        const filteredEvents = events.filter(event => {
-            const matchesKeyword = event.title.toLowerCase().includes(keyword) ||
-                                 event.description.toLowerCase().includes(keyword);
-            const matchesArea = !area || event.location.toLowerCase().includes(area.toLowerCase());
-            const matchesCategory = !category || event.category === category;
-
-            return matchesKeyword && matchesArea && matchesCategory;
-        });
-
+        // フィルタリングのロジックを削除し、すべてのイベントを表示
         eventList.innerHTML = '';
-        if (filteredEvents.length === 0) {
-            document.getElementById('no-results').classList.remove('d-none');
-        } else {
-            document.getElementById('no-results').classList.add('d-none');
-            filteredEvents.forEach(event => {
-                eventList.innerHTML += createEventCard(event);
-            });
-        }
+        events.forEach(event => {
+            eventList.innerHTML += createEventCard(event);
+        });
     }
-
-    // 検索フィルターのイベントリスナー
-    document.getElementById('keyword').addEventListener('input', () => {
-        debounceSearch(refreshEvents, 300);
-    });
-    document.getElementById('area').addEventListener('change', refreshEvents);
-    document.getElementById('category').addEventListener('change', refreshEvents);
 
     // 初期表示
     refreshEvents();
 });
-
-let debounceTimer;
-function debounceSearch(func, delay) {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(func, delay);
-}
 
 function createEventCard(event) {
     return `
