@@ -248,9 +248,13 @@
     </div>
 </div>
 
+<!-- フッター要素を追加 -->
+<footer id="footer"></footer>
+
+<!-- 必要なスクリプトを順序正しく読み込み -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
+<script src="{{ asset('js/common.js') }}"></script>
 <script src="{{ asset('js/home.js') }}"></script>
 
 <script>

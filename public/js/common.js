@@ -275,3 +275,62 @@ function updateCartCount() {
     }
 }
 
+// フッターの挿入
+function insertFooter() {
+    const footer = document.getElementById('footer');
+    if (footer) {
+        footer.innerHTML = `
+        <footer class="footer-section py-5">
+            <div class="container">
+                <div class="row g-4 justify-content-evenly text-white">
+                    <!-- サービスについて -->
+                    <div class="col-md-3">
+                        <h5 class="footer-heading text-center fw-bold">サービスについて</h5>
+                        <ul class="list-unstyled text-center text-white">
+                            <li><a href="#" class="text-white text-decoration-none">関西巡りについて</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">ニュースルーム</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">環境への取り組み</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">地域活動</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">採用情報</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 観光地情報 -->
+                    <div class="col-md-3">
+                        <h5 class="footer-heading text-center fw-bold">観光地情報</h5>
+                        <ul class="list-unstyled text-center text-white">
+                            <li><a href="#" class="text-white text-decoration-none">観光地を探す</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">イベント情報</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">旅行プラン作成</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">観光地の登録</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">広告掲載について</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- ヘルプ＆ガイド -->
+                    <div class="col-md-3">
+                        <h5 class="footer-heading text-center fw-bold">ヘルプ＆ガイド</h5>
+                        <ul class="list-unstyled text-center text-white">
+                            <li><a href="#" class="text-white text-decoration-none">ご利用ガイド</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">お問い合わせ</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">よくある質問</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">プライバシーポリシー</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">利用規約</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom text-center mt-4">
+                    <p class="mb-0 text-white">&copy; 2024 関西巡り All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+        `;
+    }
+}
+
+// DOMContentLoadedイベントでフッターを挿入
+document.addEventListener('DOMContentLoaded', function() {
+    insertFooter();
+});
+
