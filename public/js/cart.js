@@ -35,7 +35,7 @@ createPlanButton.onclick = function () {
         return `${place.title}（優先度: ${place.priority}, 滞在時間: ${place.duration}分）`;
     }).join('、');
 
-/////////////////////セット///////////////////////
+    /////////////////////セット///////////////////////
     const fields = {
         startDate: '訪問日',
         startTime: '開始時間',
@@ -56,23 +56,23 @@ createPlanButton.onclick = function () {
         alert(errorMessage.join('、') + "を選択してください。");
         return;
     }
-///////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
     let lunchTimeInfo = '';
-    if(lunchTime.checked){
+    if (lunchTime.checked) {
         lunchTimeInfo = '一時間ランチタイムを追加して'
     };
     let dinnerTimeInfo = '';
-    if(dinnerTime.checked){
+    if (dinnerTime.checked) {
         dinnerTimeInfo = '一時間ディナータイムを追加して'
     };
-/////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
     let startStationInfo = '';
-    if(startStation){
+    if (startStation) {
         startStationInfo = startStation;
     }
 
     let reachStationInfo = '';
-    if(startStation){
+    if (startStation) {
         reachStationInfo = reachStation;
     }
 
@@ -109,6 +109,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     timeSelectorContainer.style.display = 'block';
     cartEventsDiv.innerHTML = '';
+
+    function createTimeline(points) {
+        const timeline = document.getElementById('timeline');
+        timeline.innerHTML = '';
+
+        points.forEach((point, index) => {
+            const pointDiv = document.createElement('div');
+            pointDiv.classList.add('point');
+            pointDiv.style.left = `${(0 / (points.length - 1)) * index}%`;
+            pointDiv.setAttribute('data-label', point.label);
+            timeline.appendChild(pointDiv);
+
+            if (index < points.length - 1) {
+                const lineDiv = document.createElement('div');
+                lineDiv.classList.add('line');
+                lineDiv.style.left = `${(100 / (points.length - 1)) * index}%`;
+                lineDiv.style.width = `${100 / (points.length - 1)}%`;
+                timeline.appendChild(lineDiv);
+            }
+        });
+    }
+
+    const points = [];
+    points.push({ label: '出発場所' });
+    cart.forEach((item, index) => {
+        points.push({ label: item.title });
+    });
+    points.push({ label: '帰る場所' });
+
+    createTimeline(points);
 
     cart.forEach((item, index) => {
         // デフォルト画像URLを設定
@@ -195,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
         cartEventsDiv.insertAdjacentHTML('beforeend', eventHtml);
     });
 });
-
 
 
 function generateOrderOptions(total, current) {

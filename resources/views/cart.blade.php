@@ -21,7 +21,6 @@ $place = ['大阪', '京都', '奈良', '神戸', '和歌山', '滋賀', '兵庫
 
 <body>
     <header id="header"></header>
-
     <div class="container py-4">
         <div class="cart-container">
             <h1>使い方：</h1>
@@ -34,6 +33,7 @@ $place = ['大阪', '京都', '奈良', '神戸', '和歌山', '滋賀', '兵庫
             <p>4. プランを作成するボタンを押してください。</p>
         </div>
     </div>
+
 
     <div class="container py-4">
         <div class="cart-container">
@@ -48,7 +48,11 @@ $place = ['大阪', '京都', '奈良', '神戸', '和歌山', '滋賀', '兵庫
 
             <div class="time-selector-container" style="display: none;">
                 <div class="row justify-content-center mb-4">
+                    <div id="timeline">
+                    </div>
+                    <p></p>
                     <div class="col-md-6">
+
                         <h3 class="h5 mb-4 text-center">旅行日程の設定</h3>
                     </div>
                 </div>
