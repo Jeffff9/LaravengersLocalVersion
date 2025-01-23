@@ -9,6 +9,8 @@ createPlanButton.onclick = function () {
     const lunchTime = document.getElementById('lunchTime');
     const dinnerTime = document.getElementById('dinnerTime');
     const priority = [];
+    const startStation = document.getElementById('startStation')?.value || '';
+    const reachStation = document.getElementById('reachStation')?.value || '';
 
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
@@ -55,31 +57,39 @@ createPlanButton.onclick = function () {
         return;
     }
 ///////////////////////////////////////////////////
-    const lunchTimeInfo = '';
+    let lunchTimeInfo = '';
     if(lunchTime.checked){
-        lunchTimeInfo = 'ランチタイムを追加して'
+        lunchTimeInfo = '一時間ランチタイムを追加して'
     };
+    let dinnerTimeInfo = '';
+    if(dinnerTime.checked){
+        dinnerTimeInfo = '一時間ディナータイムを追加して'
+    };
+/////////////////////////////////////////////////////
+    let startStationInfo = '';
+    if(startStation){
+        startStationInfo = startStation;
+    }
+
+    let reachStationInfo = '';
+    if(startStation){
+        reachStationInfo = reachStation;
+    }
 
     const question = `
 以下の場所を訪れるプランを作成してください：
 ${placesList}
-
 条件：
 - 訪問日: ${startDate}
 - 開始時間: ${startTime}時
 - 終了時間: ${endTime}時
-- 出発地: ${departurePlace}
-- 到着地: ${destination}
-${lunchTimeInfo}
-
-以下の情報も考慮してプランを作成してください：
-${priority.map(place => `
-- ${place.title}
-  - 営業時間: ${place.details?.openingHours || '情報なし'}
-  - アクセス: ${place.details?.access || '情報なし'}
-`).join('\n')}
-
+- 出発地: ${departurePlace},${startStationInfo}
+- 到着地: ${destination},${reachStationInfo}
+- ${lunchTimeInfo}
+- ${dinnerTimeInfo}
+乗換案内、営業時間、アクセス、料金を確認してください。
 日本語で具体的な時間のスケジュールを作成してください。
+アドバイスをください。
 `;
 
     localStorage.setItem('question', JSON.stringify(question));

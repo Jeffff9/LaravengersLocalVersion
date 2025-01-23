@@ -19,7 +19,7 @@ class ResultController extends Controller
     public function chat(Request $request){
         try {
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer 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',
+                'Authorization' => 'Bearer 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',
                 'Content-Type' => 'application/json',
             ])->post('https://api.perplexity.ai/chat/completions', [
                 'messages' => $request->input('question'),
