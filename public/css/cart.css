@@ -22,6 +22,43 @@ body {
     transform: translateX(-50%);
     z-index: 2;
 }
+
+/* 出発場所の点に歩く人のアイコンを追加 */
+.point:first-child::before {
+    content: '\f554'; /* Font Awesomeの歩く人のアイコン（fa-person-walking）*/
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 45px;
+    animation: walkingPerson 3s infinite;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 3px rgba(0, 123, 255, 0.4));
+}
+
+/* 歩く人のアニメーション - 歩いているような動き */
+@keyframes walkingPerson {
+    0% {
+        transform: translateX(-50%) translateY(0) scaleY(1);
+    }
+    25% {
+        transform: translateX(-50%) translateY(-3px) scaleY(1.02);
+    }
+    50% {
+        transform: translateX(-50%) translateY(0) scaleY(1);
+    }
+    75% {
+        transform: translateX(-50%) translateY(-3px) scaleY(1.02);
+    }
+    100% {
+        transform: translateX(-50%) translateY(0) scaleY(1);
+    }
+}
+
 .point::after {
     content: attr(data-label);
     position: absolute;
@@ -34,12 +71,30 @@ body {
     text-align: center;
 }
 .line {
-    height: 2px;
-    background-color: #007BFF;
+    height: 3px; /* 線を少し太く */
+    background: linear-gradient(90deg, #007BFF, #00d4ff);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2); /* 影を追加 */
+}
+
+/* 線の上の点線をより鉄道線路っぽく */
+.line::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background-image:
+        linear-gradient(90deg, #007BFF 50%, transparent 50%),
+        linear-gradient(90deg, #007BFF 50%, transparent 50%);
+    background-position: 0 0, 0 100%;
+    background-size: 15px 2px;
+    background-repeat: repeat-x;
+    opacity: 0.2;
 }
 
 .cart-container {
