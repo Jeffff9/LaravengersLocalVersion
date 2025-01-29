@@ -10,14 +10,17 @@ body {
     /* border: 1px solid #007BFF; */
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 .point {
     width: 20px;
     height: 20px;
     background-color: #007BFF;
     border-radius: 50%;
-    position: relative;
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: 2;
 }
 .point::after {
     content: attr(data-label);
@@ -36,7 +39,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: auto;
+    z-index: 1;
 }
 
 .cart-container {

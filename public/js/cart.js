@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const timeSelectorContainer = document.querySelector('.time-selector-container');
 
     if (cart.length === 0) {
-        cartEventsDiv.innerHTML = '<p class="text-muted">カートにイベントが追加さ���ていません。</p>';
+        cartEventsDiv.innerHTML = '<p class="text-muted">カートにイベントが追加されていません。</p>';
         timeSelectorContainer.style.display = 'none';
         return;
     }
@@ -213,21 +213,20 @@ function createTimeline(points) {
     points.forEach((point, index) => {
         const pointDiv = document.createElement('div');
         pointDiv.classList.add('point');
-        pointDiv.style.left = `${(0 / (points.length - 1)) * index}%`;
+        const position = (100 / (points.length - 1)) * index;
+        pointDiv.style.left = `${position}%`;
         pointDiv.setAttribute('data-label', point.label);
         timeline.appendChild(pointDiv);
 
         if (index < points.length - 1) {
             const lineDiv = document.createElement('div');
             lineDiv.classList.add('line');
-            lineDiv.style.left = `${(100 / (points.length - 1)) * index}%`;
+            lineDiv.style.left = `${position}%`;
             lineDiv.style.width = `${100 / (points.length - 1)}%`;
             timeline.appendChild(lineDiv);
         }
     });
 }
-
-
 
 function generateOrderOptions(total, current) {
     let options = '';
@@ -250,51 +249,34 @@ function removeFromCart(index) {
     location.reload();
 }
 
-
 function updateEventOrder(selectedIndex, selectedValue) {
-    const newOrder = parseInt(selectedValue) - 1; // Convert 1-based to 0-based index
+    const newOrder = parseInt(selectedValue) - 1;
     const selects = document.querySelectorAll('.form-select1');
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-    // Get the previous order value to adjust for any conflicts
-    const previousValue = parseInt(selects[selectedIndex].getAttribute('data-prev-value')) - 1;
+    // 現在の選択された項目を一時的に保存
+    const selectedItem = cart[selectedIndex];
 
-    // Check for duplicate order values and adjust other selects if needed
-    selects.forEach((select, index) => {
-        const currentValue = parseInt(select.value) - 1;
-        if (index !== selectedIndex && currentValue === newOrder) {
-            select.value = previousValue + 1; // Convert back to 1-based
-            select.setAttribute('data-prev-value', previousValue + 1);
+    // 他のアイテムの順番を調整
+    cart.forEach((item, index) => {
+        if (index === selectedIndex) return;
+        const currentOrder = parseInt(selects[index].value) - 1;
+
+        if (newOrder <= currentOrder) {
+            selects[index].value = (currentOrder + 1).toString();
         }
     });
 
-    // Update the selected order in the DOM and data
-    selects[selectedIndex].setAttribute('data-prev-value', newOrder + 1); // 0-based to 1-based
+    // カートから選択された項目を削除
+    cart.splice(selectedIndex, 1);
+    // 新しい位置に項目を挿入
+    cart.splice(newOrder, 0, selectedItem);
 
-    // Update the cart order based on the new value
-    cart = cart.map((item, index) => ({
-        ...item,
-        order: parseInt(selects[index].value) - 1, // Convert to 0-based index
-    }));
-
-    // Sort the cart based on the updated order
-    cart.sort((a, b) => a.order - b.order);
-
-    // Save the updated cart in localStorage
+    // カートを保存
     localStorage.setItem('cart', JSON.stringify(cart));
 
-    console.log(cart);
-
-    const points = [];
-    points.push({ label: '出発場所' });
-    cart.forEach((item) => {
-        points.push({ label: item.title });
-    });
-    points.push({ label: '帰る場所' });
-
-    console.log(points);
-
-    createTimeline(points);
+    // ページをリロードして新しい順序を反映
+    location.reload();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
