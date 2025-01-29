@@ -38,7 +38,7 @@ body {
     font-size: 1.1rem;
 }
 
-.result-content {
+.citations-content {
     background: #f8f9fa;
     padding: 2rem;
     border-radius: 10px;
@@ -46,7 +46,6 @@ body {
     line-height: 1.8;
     font-size: 1.1rem;
     color: #2c3e50;
-    white-space: pre-line;
 }
 
 .action-buttons {
@@ -76,7 +75,7 @@ body {
         padding: 0;
     }
 
-    .result-content {
+    .citations-content {
         background: none;
         padding: 0;
     }
@@ -104,27 +103,28 @@ body {
     }
 }
 
-.request-content {
+.result-content {
     background: #fff;
     padding: 1.5rem;
     border-radius: 10px;
     margin: 1.5rem 0;
     border: 1px solid #e1e8ed;
+    white-space: pre-line;
 }
 
-.request-content h5 {
+.result-content h5 {
     color: #2c3e50;
     margin-bottom: 1rem;
     font-size: 1.1rem;
     font-weight: 600;
 }
 
-.request-content h5 i {
+.result-content h5 i {
     color: #3498db;
     margin-right: 0.5rem;
 }
 
-.request-content p {
+.result-content p {
     color: #34495e;
     margin-bottom: 0;
     line-height: 1.6;
@@ -132,7 +132,7 @@ body {
 }
 
 @media print {
-    .request-content {
+    .result-content {
         border: none;
         padding: 0;
     }

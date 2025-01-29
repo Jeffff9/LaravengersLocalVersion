@@ -110,27 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
     timeSelectorContainer.style.display = 'block';
     cartEventsDiv.innerHTML = '';
 
-    function createTimeline(points) {
-        const timeline = document.getElementById('timeline');
-        timeline.innerHTML = '';
-
-        points.forEach((point, index) => {
-            const pointDiv = document.createElement('div');
-            pointDiv.classList.add('point');
-            pointDiv.style.left = `${(0 / (points.length - 1)) * index}%`;
-            pointDiv.setAttribute('data-label', point.label);
-            timeline.appendChild(pointDiv);
-
-            if (index < points.length - 1) {
-                const lineDiv = document.createElement('div');
-                lineDiv.classList.add('line');
-                lineDiv.style.left = `${(100 / (points.length - 1)) * index}%`;
-                lineDiv.style.width = `${100 / (points.length - 1)}%`;
-                timeline.appendChild(lineDiv);
-            }
-        });
-    }
-
     const points = [];
     points.push({ label: '出発場所' });
     cart.forEach((item, index) => {
@@ -193,11 +172,12 @@ document.addEventListener('DOMContentLoaded', function () {
                                 ` : ''}
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">行く順番：</label>
-                                <select id="placePriority${index}" class="form-select" onchange="updateEventOrder(${index}, this.value)">
+                                <label id="priorityLabel${index}" class="form-label">行く順番：</label>
+                                <select id="placePriority${index}" class="form-select1" onchange="updateEventOrder(${index}, this.value)">
                                     ${generateOrderOptions(cart.length, index)}
                                 </select>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">滞在時間：</label>
                                 <select id="durationSelect${index}" class="form-select" onchange="updateEventDuration(${index}, this.value)">
@@ -226,19 +206,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+function createTimeline(points) {
+    const timeline = document.getElementById('timeline');
+    timeline.innerHTML = '';
+
+    points.forEach((point, index) => {
+        const pointDiv = document.createElement('div');
+        pointDiv.classList.add('point');
+        pointDiv.style.left = `${(0 / (points.length - 1)) * index}%`;
+        pointDiv.setAttribute('data-label', point.label);
+        timeline.appendChild(pointDiv);
+
+        if (index < points.length - 1) {
+            const lineDiv = document.createElement('div');
+            lineDiv.classList.add('line');
+            lineDiv.style.left = `${(100 / (points.length - 1)) * index}%`;
+            lineDiv.style.width = `${100 / (points.length - 1)}%`;
+            timeline.appendChild(lineDiv);
+        }
+    });
+}
+
+
 
 function generateOrderOptions(total, current) {
     let options = '';
     for (let i = 1; i <= total; i++) {
-        options += `<option value="${i}" ${i === current + 1 ? 'selected' : ''}>${i}番目</option>`;
+        options += `<option value="${i}" ${i === current +1 ? 'selected' : ''}>${i}番目</option>`;
     }
     return options;
-}
-
-function updateEventOrder(index, order) {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    cart[index].order = parseInt(order);
-    localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 function updateEventDuration(index, duration) {
@@ -253,3 +249,63 @@ function removeFromCart(index) {
     localStorage.setItem('cart', JSON.stringify(cart));
     location.reload();
 }
+
+
+function updateEventOrder(selectedIndex, selectedValue) {
+    const newOrder = parseInt(selectedValue) - 1; // Convert 1-based to 0-based index
+    const selects = document.querySelectorAll('.form-select1');
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // Get the previous order value to adjust for any conflicts
+    const previousValue = parseInt(selects[selectedIndex].getAttribute('data-prev-value')) - 1;
+
+    // Check for duplicate order values and adjust other selects if needed
+    selects.forEach((select, index) => {
+        const currentValue = parseInt(select.value) - 1;
+        if (index !== selectedIndex && currentValue === newOrder) {
+            select.value = previousValue + 1; // Convert back to 1-based
+            select.setAttribute('data-prev-value', previousValue + 1);
+        }
+    });
+
+    // Update the selected order in the DOM and data
+    selects[selectedIndex].setAttribute('data-prev-value', newOrder + 1); // 0-based to 1-based
+
+    // Update the cart order based on the new value
+    cart = cart.map((item, index) => ({
+        ...item,
+        order: parseInt(selects[index].value) - 1, // Convert to 0-based index
+    }));
+
+    // Sort the cart based on the updated order
+    cart.sort((a, b) => a.order - b.order);
+
+    // Save the updated cart in localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    console.log(cart);
+
+    const points = [];
+    points.push({ label: '出発場所' });
+    cart.forEach((item) => {
+        points.push({ label: item.title });
+    });
+    points.push({ label: '帰る場所' });
+
+    console.log(points);
+
+    createTimeline(points);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const selects = document.querySelectorAll('.form-select1');
+    selects.forEach(select => {
+        select.setAttribute('data-prev-value', select.value);
+    });
+
+    // selects.forEach((select, index) => {
+    //     select.addEventListener('change', (e) => {
+    //         updateEventOrder(index, e.target.value);
+    //     });
+    // });
+});

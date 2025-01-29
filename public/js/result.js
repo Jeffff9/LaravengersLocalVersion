@@ -1,14 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const resultcontent = document.querySelector('.result-content');
-    const requestcontent = document.querySelector('.request-content');
-    const citations = document.querySelector('.citations');
-
     const question = localStorage.getItem('question');
-    requestcontent.textContent = question;
-
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    /////////////////////////Loading//////////////////////////
+    const citations = document.querySelector('.citations');
     const loadingElement = document.getElementById("loading");
     const citationsTittle = document.querySelector(".citations-tittle");
+
     let dotCount = 1;
 
     setInterval(() => {
@@ -18,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingElement.textContent = "Loading" + ".".repeat(dotCount);
         dotCount++;
     }, 1000);
+    //////////////////////////////////////////////////////////
 
     fetch('/api/chat', {
         method: 'POST',
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({
             messages: [{ role: 'user', content: JSON.stringify(question) }],
             model: 'sonar',
-            temperature : '0'
+            temperature: '0'
         })
     })
         .then(response => {
