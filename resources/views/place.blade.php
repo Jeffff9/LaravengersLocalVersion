@@ -47,54 +47,49 @@
                             </h3>
 
                             <div class="filter-sections-container">
-                                <!-- カテゴリーセクション -->
-                                <div class="filter-section">
-                                    <div class="filter-header">
-                                        {{-- <h4>
-                                            <i class="bi bi-grid me-2"></i>
-                                            カテゴリー
-                                        </h4> --}}
-                                    </div>
-                                    <div class="filter-content">
-                                        <form action="{{ url('/Place') }}" method="GET">
-                                            <!-- カテゴリーフィルター -->
-                                            <div class="filter-section">
-                                                <h4>カテゴリー</h4>
-                                                @foreach($characteristics as $characteristic)
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                               name="characteristics[]" value="{{ $characteristic->characteristics }}"
-                                                               id="characteristic_{{ $loop->index }}"
-                                                               {{ in_array($characteristic->characteristics, request('characteristics', [])) ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="characteristic_{{ $loop->index }}">
-                                                            {{ $characteristic->characteristics }}
-                                                        </label>
-                                                    </div>
-                                                @endforeach
+                                <form method="GET" action="{{ route('place.index') }}">
+                                    <!-- カテゴリーフィルター -->
+                                    <div class="filter-section">
+                                        <h4>カテゴリー</h4>
+                                        @foreach(['お寺', '神社', '買い物', '自然', '風景', '建築', '公園', '植物園', '水族館', '動物園', '博物館', '美術館', '遊園地'] as $characteristic)
+                                            <div class="filter-option">
+                                                <input type="checkbox"
+                                                       class="custom-checkbox"
+                                                       name="characteristics[]"
+                                                       value="{{ $characteristic }}"
+                                                       id="char_{{ $loop->index }}"
+                                                       {{ in_array($characteristic, request('characteristics', [])) ? 'checked' : '' }}>
+                                                <span class="checkmark"></span>
+                                                <label class="label-text" for="char_{{ $loop->index }}">
+                                                    {{ $characteristic }}
+                                                </label>
                                             </div>
-
-                                            <!-- エリアフィルター -->
-                                            <div class="filter-section">
-                                                <h4>エリア</h4>
-                                                @foreach($areas as $area)
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                               name="area[]" value="{{ $area->address }}"
-                                                               id="area_{{ $loop->index }}"
-                                                               {{ in_array($area->address, request('area', [])) ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="area_{{ $loop->index }}">
-                                                            {{ $area->address }}
-                                                        </label>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-
-                                            <button type="submit" class="search-btn">
-                                                <i class="bi bi-search me-2"></i>検索する
-                                            </button>
-                                        </form>
+                                        @endforeach
                                     </div>
-                                </div>
+
+                                    <!-- エリアフィルター -->
+                                    <div class="filter-section">
+                                        <h4>エリア</h4>
+                                        @foreach(['大阪府', '京都府', '兵庫県', '奈良県', '滋賀県'] as $prefecture)
+                                            <div class="filter-option">
+                                                <input type="checkbox"
+                                                       class="custom-checkbox"
+                                                       name="location[]"
+                                                       value="{{ $prefecture }}"
+                                                       id="loc_{{ $loop->index }}"
+                                                       {{ in_array($prefecture, request('location', [])) ? 'checked' : '' }}>
+                                                <span class="checkmark"></span>
+                                                <label class="label-text" for="loc_{{ $loop->index }}">
+                                                    {{ $prefecture }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    <button type="submit" class="search-btn">
+                                        <i class="bi bi-search me-2"></i>検索する
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </aside>
