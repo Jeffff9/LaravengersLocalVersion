@@ -241,6 +241,37 @@ document.addEventListener('DOMContentLoaded', function() {
     refreshEvents();
 });
 
+function addToCart(event) {
+    // イベントの詳細情報を追加
+    event.type = 'event';  // イベントタイプを明示
+
+    // 現在のカートの内容を取得
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // イベントをカートに追加
+    cart.push(event);
+
+    // カートを保存
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // カートの数を更新
+    updateCartCount();
+
+    // アラートで通知
+    alert('カートに追加しました！');
+}
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartCount = document.querySelector('.cart-count');
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+    }
+}
+
+// ページ読み込み時にカート数を更新
+document.addEventListener('DOMContentLoaded', updateCartCount);
+
 function createEventCard(event) {
     return `
         <div class="col">
@@ -304,7 +335,8 @@ function createEventCard(event) {
                                       color: #1B4B8F;">
                                 <i class="bi bi-info-circle me-1"></i> 詳細を見る
                             </a>
-                            <button onclick="addToCart(${JSON.stringify(event)})"
+                            <button type="button"
+                                    onclick='addToCart(${JSON.stringify(event).replace(/'/g, "\\'")})'
                                     class="btn btn-primary flex-grow-1"
                                     style="border-radius: 30px;
                                            padding: 8px 20px;
